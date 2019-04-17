@@ -1,0 +1,12 @@
+[
+{
+"deviceName":"Device1",
+"deviceIPAddress":"192.168.0.1",
+"devicePort":"8001"
+},
+{
+"deviceName":"Device1",
+"deviceIPAddress":"192.168.0.",
+"devicePort":"8001"
+}
+]
