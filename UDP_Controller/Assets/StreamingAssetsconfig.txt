@@ -1,1 +1,0 @@
-[{"deviceName":"Device2","deviceIPAddress":"192.168.0.2","devicePort":"8002"},{"deviceName":"Device2","deviceIPAddress":"192.168.0.2","devicePort":"8002"}]

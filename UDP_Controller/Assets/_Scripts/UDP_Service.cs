@@ -28,7 +28,6 @@ public class UDP_Service : MonoBehaviour
 
     public void Awake()
     {
-        /*
         IPAddress ip;
         if (IPAddress.TryParse(ipSend, out ip))
         {
@@ -44,31 +43,18 @@ public class UDP_Service : MonoBehaviour
         receiveThread = new Thread(ReceiveData);
         receiveThread.IsBackground = true;
         receiveThread.Start();
-        */
 
-        Debug.Log(GetIpAddress());
     }
-
 
     //接收来自UE4的消息
     public void ReceiveData()
     {
         while (true)
         {
-            //这里写转换接收消息的方法
-
-            // Bytes received         
-            //byte[] data = client.Receive(ref anyIP);
-            //byte[] newData = new byte[4];
-            //newData[0] = data[3];
-            //newData[1] = data[2];
-            //newData[2] = data[1];
-            //newData[3] = data[0];
-            //float y = BitConverter.ToSingle(newData, 0);
-            //if (lastY == y) continue;
-            //lastY = y;
-            //// Bytes into text
-            //received = y;
+            //接收到的数据类型为byte数组
+            byte[] data = client.Receive(ref anyIP);
+            //将byte数组转换为字符串，供JSON解析
+            string str = System.Text.Encoding.Default.GetString(data);
         }
     }
 
@@ -90,16 +76,30 @@ public class UDP_Service : MonoBehaviour
         return inUse;
     }
 
-    //获取本机ID地址
+    //获取本机IP地址
+    //本机IPv4地址在IP地址列表中，AddressFamily名称为InterNetwork
     private string GetIpAddress()
     {
-        string s = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault<IPAddress>(a => a.AddressFamily.ToString().Equals("InterNetwork")).ToString();
-        Debug.Log(s);
-        string hostName = Dns.GetHostName();   //获取本机名
-        IPHostEntry localhost = Dns.GetHostEntry(hostName);
-        IPAddress localaddr = localhost.AddressList[0];
+        return Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault<IPAddress>(a => a.AddressFamily.ToString().Equals("InterNetwork")).ToString();
 
-        return localaddr.ToString();
+        //string hostName = Dns.GetHostName();//获取本机名
+        //IPHostEntry localhost = Dns.GetHostEntry(hostName);//获取本机IPv6和IPv4地址
+        //foreach (var item in localhost.AddressList)//遍历IP列表
+        //{
+        //    Debug.Log(item.AddressFamily.ToString() + item.ToString());
+        //}
+    }
+
+    //Exit UDP client
+    public void OnDisable()
+    {
+        if (receiveThread != null)
+        {
+            receiveThread.Abort();
+            receiveThread = null;
+        }
+        client.Close();
+        Debug.Log("UDPClient: exit");
     }
 }
 

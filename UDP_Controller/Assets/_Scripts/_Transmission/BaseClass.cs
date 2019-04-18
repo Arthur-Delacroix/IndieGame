@@ -1,4 +1,6 @@
-﻿//基础传输类
+﻿using System.Collections.Generic;
+
+//基础传输类
 public class BaseClass
 {
     //传输的数据类型
@@ -6,5 +8,5 @@ public class BaseClass
     public string classType;
 
     //传输的数据，不同的数据接收的类也不同
-    public object data;
+    public List<object> data;
 }

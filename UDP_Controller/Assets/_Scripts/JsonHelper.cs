@@ -4,11 +4,15 @@ using UnityEngine;
 using LitJson;
 
 /// <summary>
+using System.Collections.Generic;
+/// <summary>
 /// 读取 / 写入 JSON
 /// </summary>
-public class JsonHelper
+public class JsonHelper : IJsonFunction
 {
-    //读取StreamingAssets下的 txt 配置文件
+    /// <summary>
+    /// 读取StreamingAssets下的 txt 配置文件
+    /// </summary>
     public string ReadData(string _dataPath)
     {
         StreamReader sr = new StreamReader(Application.streamingAssetsPath + "/" + _dataPath, Encoding.Default);
@@ -19,16 +23,6 @@ public class JsonHelper
         sr.Dispose();
         sr = null;
         return s;
-    }
-
-    /// <summary>
-    /// 将JSON字符串转化为实体类
-    /// </summary>
-    public object JsonToModel(string _jsonStr, object _jsonModel)
-    {
-        _jsonModel = JsonMapper.ToObject<object>(_jsonStr);
-
-        return _jsonModel;
     }
 
     /// <summary>
@@ -47,5 +41,17 @@ public class JsonHelper
         //关闭流
         sw.Close();
         fs.Close();
+
+        Debug.Log("<color=#00ff00>JSON写入完成</color>");
+    }
+
+    /// <summary>
+    /// 将JSON字符串转化为实体类
+    /// </summary>
+    public List<object> JsonToModel(string _jsonStr, List<object> _list)
+    {
+        _list = JsonMapper.ToObject<List<object>>(_jsonStr);
+
+        return _list;
     }
 }

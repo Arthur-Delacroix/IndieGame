@@ -66,9 +66,12 @@
 ```
 
 ---
-|123|123|
+
+##### 传输的类及其对应的字符串名称
+|Class|ClassType|
 |---|---|
-|点撒打算|多萨达|
+|ButtonInfo.class|ButtonInfo|
+|OneTouch.class|OneTouch|
 
 ```java
 //基础传输类
