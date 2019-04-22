@@ -38,7 +38,7 @@ public class UDP_Service : MonoBehaviour
             remoteEndPoint = new IPEndPoint(IPAddress.Broadcast, portSend);
         }
 
-        //Initialize client and thread for receiving
+        //启动一个在后台运行的线程，监听的端口是 portListen
         client = new UdpClient(portListen);
         receiveThread = new Thread(ReceiveData);
         receiveThread.IsBackground = true;

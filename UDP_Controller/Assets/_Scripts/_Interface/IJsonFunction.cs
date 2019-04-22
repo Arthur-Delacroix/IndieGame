@@ -10,5 +10,5 @@ public interface IJsonFunction
     void WriteJson(string _dataPath, object _model);
 
     //将JSON string转化为实体类
-    List<object> JsonToModel(string _jsonStr, List<object> _list);
+    void JsonToModel(string _jsonStr, ref List<object> _list);
 }

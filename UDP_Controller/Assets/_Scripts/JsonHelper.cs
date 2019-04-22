@@ -48,10 +48,8 @@ public class JsonHelper : IJsonFunction
     /// <summary>
     /// 将JSON字符串转化为实体类
     /// </summary>
-    public List<object> JsonToModel(string _jsonStr, List<object> _list)
+    public void JsonToModel(string _jsonStr, ref List<object> _list)
     {
         _list = JsonMapper.ToObject<List<object>>(_jsonStr);
-
-        return _list;
     }
 }
