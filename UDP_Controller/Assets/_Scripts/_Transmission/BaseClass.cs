@@ -7,6 +7,9 @@ public class BaseClass
     //此字段为判断data使用哪个类来接收/发送的重要依据
     public string classType;
 
-    //传输的数据，不同的数据接收的类也不同
-    public List<object> data;
+    //接收到的 按钮信息 数据
+    public List<ButtonInfo> receive_ButtonData;
+
+    //发送的 单指手指位置信息
+    public List<OneTouch> send_TouchPos;
 }

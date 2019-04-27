@@ -7,5 +7,11 @@ public class _Global : MonoBehaviour
     public static List<DeviceModel> deviceInfo = new List<DeviceModel>();
 
     //判断传入的JSON具体对应哪个实体类
-    public static List<string> classType = new List<string>();
+    //public static List<string> classType = new List<string>();
+
+    //接收 按钮信息
+    public static List<ButtonInfo> buttonInfo = new List<ButtonInfo>();
+
+    //接收 验证信息
+    //public  static List<>
 }

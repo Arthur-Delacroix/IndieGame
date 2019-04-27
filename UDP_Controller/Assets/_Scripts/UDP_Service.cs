@@ -90,7 +90,7 @@ public class UDP_Service : MonoBehaviour
         //}
     }
 
-    //Exit UDP client
+    //Close UDP
     public void OnDisable()
     {
         if (receiveThread != null)
@@ -100,6 +100,42 @@ public class UDP_Service : MonoBehaviour
         }
         client.Close();
         Debug.Log("UDPClient: exit");
+    }
+
+    //发送数据
+    public void SentMsg(int target)
+    {
+
+
+        byte[] pos = new byte[] { 0xFF, 0xFF, 0xFF, 0x01 };
+
+        switch (target)
+        {
+            case 1:
+                pos = new byte[] { 0xFF, 0xFF, 0xFF, 0x01 };
+                break;
+            case 2:
+                pos = new byte[] { 0xFF, 0xFF, 0xFF, 0x02 };
+                break;
+            case 3:
+                pos = new byte[] { 0xFF, 0xFF, 0xFF, 0x03 };
+                break;
+            case 4:
+                pos = new byte[] { 0xFF, 0xFF, 0xFF, 0x04 };
+                break;
+            case 5:
+                pos = new byte[] { 0xFF, 0xFF, 0xFF, 0x05 };
+                break;
+            case 6:
+                pos = new byte[] { 0xFF, 0xFF, 0xFF, 0x06 };
+                break;
+            case 7:
+                pos = new byte[] { 0xFF, 0xFF, 0xFF, 0x07 };
+                break;
+        }
+
+        client.Send(pos, pos.Length, remoteEndPoint);
+        Debug.Log("to" + target);
     }
 }
 
