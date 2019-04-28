@@ -9,6 +9,11 @@ public interface IJsonFunction
     //将实体类信息写入 txt 配置文件
     void WriteJson(string _dataPath, object _model);
 
-    //将JSON string转化为实体类
-    void JsonToModel(string _jsonStr, ref List<object> _list);
+    //将JSON转换为 ButtonInfo 实体类
+    void JsonToModel(string _jsonStr, ref List<ButtonInfo> _list);
+
+    //将 OneTouch 信息转换为 JSON
+    string OneTouchToJson(OneTouch _one);
+
+    //将 
 }

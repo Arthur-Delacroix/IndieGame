@@ -45,10 +45,26 @@ public class JsonHelper : IJsonFunction
     }
 
     /// <summary>
-    /// 将JSON字符串转化为实体类
+    /// 将JSON字符串转化为 ButtonInfo 实体类
     /// </summary>
-    public void JsonToModel(string _jsonStr, ref List<object> _list)
+    /// <param name="_jsonStr">JSON字符串</param>
+    /// <param name="_list_ButtonInfo">转化的目标实体类</param>
+    public void JsonToModel(string _jsonStr, ref List<ButtonInfo> _list_ButtonInfo)
     {
-        _list = JsonMapper.ToObject<List<object>>(_jsonStr);
+        _list_ButtonInfo = JsonMapper.ToObject<List<ButtonInfo>>(_jsonStr);
     }
+
+    /// <summary>
+    /// 将实体类信息转换成JSON信息
+    /// </summary>
+    /// <returns>JSON字符串</returns>
+    /// <param name="_one">JSON字符串</param>
+    public string OneTouchToJson(OneTouch _one)
+    {
+        string _str = JsonMapper.ToJson(_one);
+
+        return _str;
+    }
+
+    //public string
 }
