@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
+﻿using UnityEngine;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
@@ -12,18 +9,17 @@ using System.Linq;
 /// <summary>
 /// UDP基础的接收、发送方法
 /// </summary>
-
 public class UDP_Service : MonoBehaviour
 {
     //此属性需要配置
-    public int portListen;//3001
-    public string ipSend;//192.168.0.101
-    public int portSend;//2001
+    public int portListen;//本程序所监听的端口号
+    public string ipSend;//目标程序的IP地址
+    public int portSend;//目标程序的端口号
 
     private UdpClient client;
     private Thread receiveThread;
     private IPEndPoint remoteEndPoint;
-    private IPAddress ipAddressSend;
+    //private IPAddress ipAddressSend;
     IPEndPoint anyIP = new IPEndPoint(IPAddress.Any, 0);
 
     public void Awake()
@@ -54,7 +50,8 @@ public class UDP_Service : MonoBehaviour
             //接收到的数据类型为byte数组
             byte[] data = client.Receive(ref anyIP);
             //将byte数组转换为字符串，供JSON解析
-            string str = System.Text.Encoding.Default.GetString(data);
+            string str = Encoding.Default.GetString(data);
+            Debug.Log("<color=#00ffffff>接收到的信息为</color>" + str);
         }
     }
 
@@ -81,17 +78,10 @@ public class UDP_Service : MonoBehaviour
     private string GetIpAddress()
     {
         return Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault<IPAddress>(a => a.AddressFamily.ToString().Equals("InterNetwork")).ToString();
-
-        //string hostName = Dns.GetHostName();//获取本机名
-        //IPHostEntry localhost = Dns.GetHostEntry(hostName);//获取本机IPv6和IPv4地址
-        //foreach (var item in localhost.AddressList)//遍历IP列表
-        //{
-        //    Debug.Log(item.AddressFamily.ToString() + item.ToString());
-        //}
     }
 
-    //Close UDP
-    public void OnDisable()
+    //关闭 UDP 连接
+    public void CloseUPD()
     {
         if (receiveThread != null)
         {
@@ -99,14 +89,12 @@ public class UDP_Service : MonoBehaviour
             receiveThread = null;
         }
         client.Close();
-        Debug.Log("UDPClient: exit");
+        Debug.Log("<color=yellow>UDP closed</color>");
     }
 
     //发送数据
     public void SentMsg(int target)
     {
-
-
         byte[] pos = new byte[] { 0xFF, 0xFF, 0xFF, 0x01 };
 
         switch (target)
@@ -136,6 +124,16 @@ public class UDP_Service : MonoBehaviour
 
         client.Send(pos, pos.Length, remoteEndPoint);
         Debug.Log("to" + target);
+    }
+
+    private void OnDisable()
+    {
+        CloseUPD();
+    }
+
+    private void OnDestroy()
+    {
+        CloseUPD();
     }
 }
 

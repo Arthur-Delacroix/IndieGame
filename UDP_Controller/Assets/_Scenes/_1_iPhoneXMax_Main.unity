@@ -153,6 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02c8777c5b8b03e4e8172924fef858b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Json1: '{"info":"123456","objs":[{"_x1":11,"_y1":11,"_x2":12,"_y2":12},{"_x1":21,"_y1":21,"_x2":22,"_y2":22},{"_x1":31,"_y1":31,"_x2":32,"_y2":32}]}'
+  _Json2: '{"info":"qazwsx","objs":[{"_x":1,"_y":1},{"_x":2,"_y":2},{"_x":1,"_y":1}]}'
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +165,6 @@ GameObject:
   - component: {fileID: 534669905}
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
-  - component: {fileID: 534669907}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
@@ -231,17 +232,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &534669907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 534669902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02c8777c5b8b03e4e8172924fef858b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1021098399
 GameObject:
   m_ObjectHideFlags: 0

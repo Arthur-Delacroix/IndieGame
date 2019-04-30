@@ -1,5 +1,7 @@
-﻿//双指触摸，Unity发送数据给UE4
-//对应 双指放大缩小手势
+﻿/// <summary>
+/// 双指触摸，Unity发送数据给UE4
+/// 对应 双指放大缩小手势
+/// </summary>
 public class TwoTouch
 {
     //第一 根指头，X和Y的delta值

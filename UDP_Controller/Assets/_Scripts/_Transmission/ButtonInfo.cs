@@ -1,4 +1,6 @@
-﻿//存储单个按钮的信息
+﻿/// <summary>
+/// 存储单个按钮的信息
+/// </summary>
 public class ButtonInfo
 {
     //在Unity上显示的按钮文字
