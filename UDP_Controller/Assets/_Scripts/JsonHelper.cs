@@ -2,6 +2,7 @@
 using System.Text;
 using UnityEngine;
 using LitJson;
+using System.Collections.Generic;
 
 /// <summary>
 /// 读取 / 写入 JSON
@@ -9,28 +10,31 @@ using LitJson;
 public class JsonHelper
 {
     /// <summary>
-    /// 读取StreamingAssets下的 txt 配置文件
+    /// 读取StreamingAssets下的配置文件，并将读取到的数据转换为设备信息(DeviceInfo)类
     /// </summary>
-    public string ReadData(string _dataPath)
+    public string ReadData()
     {
-        StreamReader sr = new StreamReader(Application.streamingAssetsPath + "/" + _dataPath, Encoding.Default);
+        StreamReader sr = new StreamReader(Application.streamingAssetsPath + _Global.configFilePath, Encoding.Default);
         string s = sr.ReadToEnd();
 
         //释放文件流
         sr.Close();
         sr.Dispose();
         sr = null;
+
+        Debug.Log("<color=#00ff00>文件读取完成</color>");
+
         return s;
     }
 
     /// <summary>
     /// 将实体类信息写入 txt 配置文件
     /// </summary>
-    public void WriteJson(string _dataPath, object _model)
+    public void WriteJson(List<DeviceInfo> _info)
     {
-        string tempJson = JsonMapper.ToJson(_model);
+        string tempJson = JsonMapper.ToJson(_info);
 
-        FileStream fs = new FileStream(Application.streamingAssetsPath + "/" + _dataPath, FileMode.Create);
+        FileStream fs = new FileStream(Application.streamingAssetsPath + _Global.configFilePath, FileMode.Create);
         StreamWriter sw = new StreamWriter(fs);
         //开始写入
         sw.Write(tempJson);

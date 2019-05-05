@@ -1,8 +1,14 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class _Global : MonoBehaviour
 {
-    //存储所有设备的名称、IP地址、端口号
-    public static List<DeviceModel> deviceInfo = new List<DeviceModel>();
+    //StreamingAssets目录下config.txt文件的位置
+    //如果config.txt之前有文件夹，格式为 /FileName/config.txt
+    public static string configFilePath = "/config.txt";
+
+    //存储当前目标设备的IP地址
+    public static string targetDeviceIP;
+
+    //当前目标设备的端口号
+    public static int targetDevicePort;
 }
