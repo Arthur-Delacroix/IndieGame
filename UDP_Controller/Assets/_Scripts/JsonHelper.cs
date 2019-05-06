@@ -12,7 +12,7 @@ public class JsonHelper
     /// <summary>
     /// 读取StreamingAssets下的配置文件，并将读取到的数据转换为设备信息(DeviceInfo)类
     /// </summary>
-    public string ReadData()
+    public List<DeviceInfo> ReadData()
     {
         StreamReader sr = new StreamReader(Application.streamingAssetsPath + _Global.configFilePath, Encoding.Default);
         string s = sr.ReadToEnd();
@@ -24,7 +24,10 @@ public class JsonHelper
 
         Debug.Log("<color=#00ff00>文件读取完成</color>");
 
-        return s;
+        List<DeviceInfo> _infoList = new List<DeviceInfo>();
+        _infoList = JsonMapper.ToObject<List<DeviceInfo>>(s);
+
+        return _infoList;
     }
 
     /// <summary>

@@ -1,12 +1,1 @@
-[
-{
-"deviceName":"Device1",
-"deviceIPAddress":"192.168.0.1",
-"devicePort":"8001"
-},
-{
-"deviceName":"Device1",
-"deviceIPAddress":"192.168.0.",
-"devicePort":"8001"
-}
-]
+[{"deviceName":"\u4E00\u53F7VIP\u5BA4 \u5927\u5C4F \u6C99\u76D8\u5C55\u793A","deviceIP":"192.168.0.101","devicePort":"1234"},{"deviceName":"\u4E00\u53F7VIP\u5BA4 \u5927\u5C4F \u6F2B\u6E38","deviceIP":"192.168.0.201","devicePort":"741852"},{"deviceName":"\u4E8C\u53F7VIP\u5BA4 \u5927\u5C4F \u9009\u623F","deviceIP":"192.168.0.103","devicePort":"1234"},{"deviceName":"\u5927\u5385 \u5927\u5C4F\u5C55\u793A","deviceIP":"192.168.0.107","devicePort":"4267"}]
