@@ -10,8 +10,16 @@ public class SelectiontPanel : MonoBehaviour
     //存储所有显示在列表中的设备信息
     [SerializeField] private List<GameObject> insDeviceButton;
 
+    //实例化设备信息时，需要先将ContentSizeFitter设置为false
     [SerializeField] private ContentSizeFitter fitter;
+    //设备信息实例元素的父级
     [SerializeField] private GameObject deviceInfoParent;
+
+    //UDP组件 用于点击按钮后创建UDP连接
+    [SerializeField] private UDP_Service udp;
+
+    //总控制器 切换当前要显示的面板
+    [SerializeField] private _Controller controlPanel;
 
     //在加载时初始化
     private void OnEnable()
@@ -21,35 +29,6 @@ public class SelectiontPanel : MonoBehaviour
         {
             ReadConfigFile();
         }
-
-        //List<DeviceInfo> list1 = new List<DeviceInfo>();
-        //DeviceInfo info1 = new DeviceInfo();
-        //info1.deviceName = "一号VIP室 大屏 沙盘展示";
-        //info1.deviceIP = "192.168.0.101";
-        //info1.devicePort = "1234";
-
-        //DeviceInfo info2 = new DeviceInfo();
-        //info2.deviceName = "一号VIP室 大屏 漫游";
-        //info2.deviceIP = "192.168.0.201";
-        //info2.devicePort = "741852";
-
-        //DeviceInfo info3 = new DeviceInfo();
-        //info3.deviceName = "二号VIP室 大屏 选房";
-        //info3.deviceIP = "192.168.0.103";
-        //info3.devicePort = "1234";
-
-        //DeviceInfo info4 = new DeviceInfo();
-        //info4.deviceName = "大厅 大屏展示";
-        //info4.deviceIP = "192.168.0.107";
-        //info4.devicePort = "4267";
-
-        //list1.Add(info1);
-        //list1.Add(info2);
-        //list1.Add(info3);
-        //list1.Add(info4);
-
-        //JsonHelper h = new JsonHelper();
-        //h.WriteJson(list1);
     }
 
     //添加一个新的设备信息
@@ -114,5 +93,18 @@ public class SelectiontPanel : MonoBehaviour
         jhple.WriteJson(_infoList);
 
         Debug.Log("<color=#00ffff>删除了设备信息，当前设备信息数量:" + insDeviceButton.Count + "</color>");
+    }
+
+    //按钮点击后 根据设备信息创建UDP连接
+    public void StartUDP()
+    {
+        controlPanel.SwitchPanel();
+        udp.StartUDP();
+    }
+
+    //通过UDP发出消息
+    public void SentUDPMessage(string _msg)
+    {
+        udp.SentMsg(_msg);
     }
 }

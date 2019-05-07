@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using LitJson;
 
 /// <summary>
 /// 在设备下拉列表中的 单个设备信息块
@@ -63,5 +64,27 @@ public class DeviceItemIns : MonoBehaviour
     public DeviceInfo GetDeviceInfo()
     {
         return _selfInfo;
+    }
+
+    //启动UDP连接 并发送初始化信息
+    public void StartUDP()
+    {
+        _Global.targetDeviceIP = _selfInfo.deviceIP;
+        _Global.targetDevicePort = int.Parse(_selfInfo.devicePort);
+
+        Debug.Log("<color=#ffff00>按钮点击，开始创建UDP连接</color>");
+        Debug.Log("<color=#ffff00>IP: " + _Global.targetDeviceIP + "</color>");
+        Debug.Log("<color=#ffff00>Port: " + _Global.targetDevicePort + "</color>");
+
+        panelComponent.StartUDP();
+
+        //发送初始化信息
+        BaseClass bc = new BaseClass();
+        bc.classType = MessageType.UDP_Init.ToString();
+        bc.jsonData= MessageType.UDP_Init.ToString();
+
+        string _msg = JsonMapper.ToJson(bc);
+
+        panelComponent.SentUDPMessage(_msg);
     }
 }

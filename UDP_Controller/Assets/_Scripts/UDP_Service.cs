@@ -5,16 +5,18 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Net.NetworkInformation;
 using System.Linq;
+using UnityEngine.UI;
 
 /// <summary>
 /// UDP基础的接收、发送方法
 /// </summary>
 public class UDP_Service : MonoBehaviour
 {
+    //在主界面上显示当前UDP的IP地址和端口号，供UE4程序连接
+    [SerializeField] private Text UDPInfo;
+
     //此属性需要配置
     public int portListen;//本程序所监听的端口号
-    public string ipSend;//目标程序的IP地址
-    public int portSend;//目标程序的端口号
 
     private UdpClient client;
     private Thread receiveThread;
@@ -22,16 +24,24 @@ public class UDP_Service : MonoBehaviour
     //private IPAddress ipAddressSend;
     IPEndPoint anyIP = new IPEndPoint(IPAddress.Any, 0);
 
-    public void Awake()
+    private void Start()
     {
+        //显示本机UDP信息，供UE4连接用
+        UDPInfo.text = "本机IP地址为：" + GetIpAddress() + "\n 本机端口号为：" + portListen.ToString();
+    }
+
+    //开启UDP连接
+    public void StartUDP()
+    {
+        //配置目标设备的IP和端口号，用于发送数据
         IPAddress ip;
-        if (IPAddress.TryParse(ipSend, out ip))
+        if (IPAddress.TryParse(_Global.targetDeviceIP, out ip))
         {
-            remoteEndPoint = new IPEndPoint(ip, portSend);
+            remoteEndPoint = new IPEndPoint(ip, _Global.targetDevicePort);
         }
         else
         {
-            remoteEndPoint = new IPEndPoint(IPAddress.Broadcast, portSend);
+            remoteEndPoint = new IPEndPoint(IPAddress.Broadcast, _Global.targetDevicePort);
         }
 
         //启动一个在后台运行的线程，监听的端口是 portListen
@@ -40,6 +50,10 @@ public class UDP_Service : MonoBehaviour
         receiveThread.IsBackground = true;
         receiveThread.Start();
 
+        Debug.Log("<color=#add8e6>UDP已经启动</color>");
+        Debug.Log("<color=#add8e6>目标设备IP：" + _Global.targetDeviceIP + "</color>");
+        Debug.Log("<color=#add8e6>目标设备端口：" + _Global.targetDevicePort + "</color>");
+        Debug.Log("<color=#add8e6>自身设备监听端口：" + portListen + "</color>");
     }
 
     //接收来自UE4的消息
@@ -51,10 +65,10 @@ public class UDP_Service : MonoBehaviour
             byte[] data = client.Receive(ref anyIP);
             //将byte数组转换为字符串，供JSON解析
             string str = Encoding.Default.GetString(data);
-            Debug.Log("<color=#00ffffff>接收到的信息为</color>" + str);
+
+            Debug.Log("<color=#00ff00>接收到的信息为</color>" + "<color=#ffa500>" + str + "</color>");
         }
     }
-
 
     //检查端口号是否被占用
     public bool PortInUse(int port)
@@ -88,42 +102,24 @@ public class UDP_Service : MonoBehaviour
             receiveThread.Abort();
             receiveThread = null;
         }
-        client.Close();
-        Debug.Log("<color=yellow>UDP closed</color>");
+        if (client != null)
+        {
+            client.Close();
+        }
+
+        Debug.Log("<color=#00ff00>UDP已关闭</color>");
     }
 
     //发送数据
-    public void SentMsg(int target)
+    public void SentMsg(string _json)
     {
-        byte[] pos = new byte[] { 0xFF, 0xFF, 0xFF, 0x01 };
+        //将JSON数据转换为byte
+        byte[] byteArray= Encoding.Default.GetBytes(_json);
 
-        switch (target)
-        {
-            case 1:
-                pos = new byte[] { 0xFF, 0xFF, 0xFF, 0x01 };
-                break;
-            case 2:
-                pos = new byte[] { 0xFF, 0xFF, 0xFF, 0x02 };
-                break;
-            case 3:
-                pos = new byte[] { 0xFF, 0xFF, 0xFF, 0x03 };
-                break;
-            case 4:
-                pos = new byte[] { 0xFF, 0xFF, 0xFF, 0x04 };
-                break;
-            case 5:
-                pos = new byte[] { 0xFF, 0xFF, 0xFF, 0x05 };
-                break;
-            case 6:
-                pos = new byte[] { 0xFF, 0xFF, 0xFF, 0x06 };
-                break;
-            case 7:
-                pos = new byte[] { 0xFF, 0xFF, 0xFF, 0x07 };
-                break;
-        }
+        //发送至目标设备
+        client.Send(byteArray, byteArray.Length, remoteEndPoint);
 
-        client.Send(pos, pos.Length, remoteEndPoint);
-        Debug.Log("to" + target);
+        Debug.Log("<color=#800080>信息已发送</color>");
     }
 
     private void OnDisable()
