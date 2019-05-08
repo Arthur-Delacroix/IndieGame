@@ -15,6 +15,9 @@ public class UDP_Service : MonoBehaviour
     //在主界面上显示当前UDP的IP地址和端口号，供UE4程序连接
     [SerializeField] private Text UDPInfo;
 
+    //接收消息后进行各种处理的模块
+    [SerializeField] private Receiver rce;
+
     //此属性需要配置
     public int portListen;//本程序所监听的端口号
 
@@ -65,6 +68,11 @@ public class UDP_Service : MonoBehaviour
             byte[] data = client.Receive(ref anyIP);
             //将byte数组转换为字符串，供JSON解析
             string str = Encoding.Default.GetString(data);
+
+            //此处后期会增加消息反馈机制
+            //当收到UDP消息之后，会直接向UE4发送反馈，之后再进行命令处理
+
+
 
             Debug.Log("<color=#00ff00>接收到的信息为</color>" + "<color=#ffa500>" + str + "</color>");
         }
