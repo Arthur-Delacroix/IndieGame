@@ -80,8 +80,8 @@ public class DeviceItemIns : MonoBehaviour
 
         //发送初始化信息
         BaseClass bc = new BaseClass();
-        bc.classType = MessageType.UDP_Init.ToString();
-        bc.jsonData= MessageType.UDP_Init.ToString();
+        bc.classType = SentMessageType.UDP_Init.ToString();
+        bc.jsonData= SentMessageType.UDP_Init.ToString();
 
         string _msg = JsonMapper.ToJson(bc);
 
