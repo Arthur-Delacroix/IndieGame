@@ -69,12 +69,14 @@ public class UDP_Service : MonoBehaviour
             //将byte数组转换为字符串，供JSON解析
             string str = Encoding.Default.GetString(data);
 
+            //rce.OnReceiveMessage(str);
+            //rce.rec1(str);
+            _Global.transStr = str;
+
             //此处后期会增加消息反馈机制
             //当收到UDP消息之后，会直接向UE4发送反馈，之后再进行命令处理
 
-
-
-            Debug.Log("<color=#00ff00>接收到的信息为</color>" + "<color=#ffa500>" + str + "</color>");
+            //Debug.Log("<color=#00ff00>接收到的信息为</color>" + "<color=#ffa500>" + str + "</color>");
         }
     }
 
@@ -122,7 +124,7 @@ public class UDP_Service : MonoBehaviour
     public void SentMsg(string _json)
     {
         //将JSON数据转换为byte
-        byte[] byteArray= Encoding.Default.GetBytes(_json);
+        byte[] byteArray = Encoding.Default.GetBytes(_json);
 
         //发送至目标设备
         client.Send(byteArray, byteArray.Length, remoteEndPoint);

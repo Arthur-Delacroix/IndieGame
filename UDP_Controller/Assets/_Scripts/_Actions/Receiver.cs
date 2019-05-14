@@ -16,6 +16,18 @@ public class Receiver : MonoBehaviour
 
     [SerializeField] List<GameObject> btnIns = new List<GameObject>();//实例化的所有按钮预置
 
+
+
+    private void Update()
+    {
+        if (_Global.transStr != "")
+        {
+            OnReceiveMessage(_Global.transStr);
+            _Global.transStr = "";
+        }
+    }
+
+    //在收到UE4的消息后调用此方法
     public void OnReceiveMessage(string _str)
     {
         BaseClass bc = new BaseClass();
@@ -43,27 +55,30 @@ public class Receiver : MonoBehaviour
         touchArea.SetActive(false);
 
         //收到信息后先判断之前是否有按钮已经在显示
+        //如果已经存在按钮，则先删除之前的按钮，再生成新的
         if (btnIns.Count != 0)
         {
+            foreach (GameObject item in btnIns)
+            {
+                Destroy(item);
+            }
+            btnIns.Clear();
         }
 
-        Debug.Log("接收到的信息为 Msg_ButtonList");
+        Debug.Log("接收到的信息为 Msg_ButtonList，开始生成对应的按钮");
 
-        //ButtonInfo bl = new ButtonInfo();
         List<ButtonInfo> list = new List<ButtonInfo>();
 
         list = JsonMapper.ToObject<List<ButtonInfo>>(_data);
 
         foreach (ButtonInfo item in list)
         {
-            Debug.Log(item.buttonName);
-
             //实例化 按钮
             GameObject temp = Instantiate(buttonPrefab);
             temp.GetComponent<ButtonIns>().Init(item.buttonName, item.actionCode, UDP);
 
             //设置父级
-
+            temp.transform.SetParent(buttonArea.transform);
 
             btnIns.Add(temp);
         }
@@ -74,6 +89,8 @@ public class Receiver : MonoBehaviour
     {
         Debug.Log("接收到的信息为 Msg_ButtonTouch");
 
+        ButtonList(_data);
+
         touchArea.SetActive(true);
-    } 
+    }
 }

@@ -28,6 +28,8 @@ public class ButtonIns : MonoBehaviour
     //按钮按下执行的方法
     public void ButtonClick()
     {
-        UDP.SendMessage(directive);
+
+
+        UDP.SentMsg(directive);
     }
 }
