@@ -4,9 +4,9 @@
 ---
 
 #### 相关文档
-- [ChangeLog]()
-- [Game Design Document - Simple]()
-- [Game Design Document]()
+- [ChangeLog](https://github.com/Arthur-Delacroix/BossRush/blob/master/Documentation/ChangeLog.md)
+- [Game Design Document - Simple](https://github.com/Arthur-Delacroix/BossRush/blob/master/Documentation/GDD_Simple.md)
+- [Game Design Document](https://github.com/Arthur-Delacroix/BossRush/blob/master/Documentation/GDD.md)
 - [Blog](https://arthur-delacroix.github.io/)
 
 #### 相关连接
