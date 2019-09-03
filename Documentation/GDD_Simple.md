@@ -1,14 +1,19 @@
-# Game design document - Simple
+# Game Design Document - Simple
+
 ##### 游戏名称
 - 
+
 ##### 游戏系统
 - iOS
 - OSX
 - PC
+
 ##### 目标玩家年龄
-- 10+
+- 
+
 ##### 预计ESRB分级
 - E
+
 ##### 游戏概要、可玩性
 - 
 

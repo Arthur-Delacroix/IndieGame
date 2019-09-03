@@ -1,4 +1,5 @@
-# Five-in-a-row Game design document
+# Game Design Document
+
 ## 游戏基本信息
 - 游戏名称：
 - 游戏系统：iOS OSX PC
