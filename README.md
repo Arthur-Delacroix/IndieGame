@@ -1,9 +1,9 @@
-# Unity3D 独立游戏 MyGround！
+# Unity3D 独立游戏
 ![Release](https://img.shields.io/badge/Release-Ver0.0.1丨Alpha-green.svg) ![license](https://img.shields.io/badge/License-MIT-blue.svg) ![Platform](https://img.shields.io/badge/Platform-OSX丨iOS丨PC-blueviolet.svg)
 
 ---
 
-#### 相关文档
+#### 项目相关文档
 - [ChangeLog](https://github.com/Arthur-Delacroix/BossRush/blob/master/Documentation/ChangeLog.md)
 - [Game Design Document - Simple](https://github.com/Arthur-Delacroix/BossRush/blob/master/Documentation/GDD_Simple.md)
 - [Game Design Document](https://github.com/Arthur-Delacroix/BossRush/blob/master/Documentation/GDD.md)
@@ -11,19 +11,15 @@
 - [论文辅导手册](http://appd10.beiwaionline.com/lunwen/non-english-handbook/index.html)
 
 #### 引擎相关
-- Unity3D 2019.2.2f1
-- URP
+- Unity3D
+- URP(LWRP)
 - shder graph
-- Unity Visual Effect Graph
 - Unity Timeline
-
-#### 相关连接
-
 
 #### 项目介绍
 游戏名字没想好……
 
-个人本科毕业时候需要写一个论文，正好论文范围内有一个“Xx功能的App应用设计与开发”，感觉这个命题范围比较大，而且应该是包含我这个游戏的，所以以此为契机，做一款自己喜欢的游戏。即使只有雏形，只要开始了这个项目，觉得可以在后期一直完善它，作为自己一个在程序之路上成长的见证。
+个人本科毕业时候需要写一个论文，正好论文范围内有一个“Xx功能的App应用设计与开发”，感觉这个命题范围比较大，而且应该是包含我这个做游戏的想法，所以以此为契机，做一款自己喜欢的游戏。即使只有雏形，只要开始了这个项目，觉得可以在后期一直完善它，作为自己一个在程序之路上成长的见证。
 
 #### 其他临时想法
 这些临时想法经过思考和过滤，后期会归纳到GDD或者设计框架文档中
@@ -48,6 +44,7 @@
 - 《Unity Shader入门精要》
 - 《游戏设计的236个技巧  游戏机制、关卡设计和镜头窍门》
 - Unity官方帮助手册<br/>https://docs.unity3d.com/Manual/index.html
+- Unity官方LWRP文档<br/>https://docs.unity3d.com/Packages/com.unity.render-pipelines.lightweight@6.9/manual/index.html
 - Unity Scripting API documentation<br/>https://docs.unity3d.com/ScriptReference/index.html
 - Mathematics for Computer Games Development using Unity<br/>https://www.udemy.com/course/games_mathematics/
 - The Beginner's Guide to Animation in Unity <br/>https://www.udemy.com/course/mastering-3d-animation-in-unity/
@@ -58,3 +55,7 @@
 - ESRB分级 https://baike.baidu.com/item/ESRB/1180489?fr=aladdin
 
 #### Other & TODO
+- 游戏流程图
+- 游戏设计思维导图
+- 初期UI设计稿
+- 游戏模型及设计思路手稿
