@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 //存放 六边形元素HexCell 的网格
 
@@ -12,6 +13,12 @@ public class HexGrid : MonoBehaviour
 
     //单个六边形元素的脚本
     public HexCell cellPrefab;
+
+    //调试用的坐标显示文本Prefab
+    [SerializeField] private Text cellLabelPrefab;
+
+    //显示坐标TEXT的Canvas组件
+    [SerializeField] private Canvas gridCanvas;
 
     //保存每个HexCell的实例的数组
     [SerializeField] private HexCell[] cells;
@@ -36,7 +43,7 @@ public class HexGrid : MonoBehaviour
     //X数组中横向位置；Z数组中纵向位置；i该HexCell在数组是第几个
     void CreateCell(int x, int z, int i)
     {
-        //由于Plane的默认为10X10，所以每次实例化下一个HexCell时，要偏移10单位
+        //由于Plane的默认为10X10，所以每次实例化下一个HexCell时，要偏移10
         Vector3 position;
         position.x = x * 10f;
         position.y = 0f;
@@ -49,5 +56,11 @@ public class HexGrid : MonoBehaviour
         //设置HexCell的父级和位置
         cell.transform.SetParent(transform, false);
         cell.transform.localPosition = position;
+
+        //实例化显示HexCell坐标位置的text，并且设置其父级和位置没让text和HexCell位置相同
+        Text label = Instantiate<Text>(cellLabelPrefab);
+        label.rectTransform.SetParent(gridCanvas.transform, false);
+        label.rectTransform.anchoredPosition = new Vector2(position.x, position.z);
+        label.text = x.ToString() + "\n" + z.ToString();
     }
 }
