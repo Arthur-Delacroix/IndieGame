@@ -20,18 +20,14 @@ public class HexGrid : MonoBehaviour
     //显示坐标TEXT的Canvas组件
     [SerializeField] private Canvas gridCanvas;
 
+    //存储正六边形网格生成器脚本
+    [SerializeField] private HexMesh hexMesh;
+
     //保存每个HexCell的实例的数组
     [SerializeField] private HexCell[] cells;
 
     void Awake()
     {
-        Debug.Log(0 / 2);
-        Debug.Log(1 / 2);
-        Debug.Log(2 / 2);
-        Debug.Log(3 / 2);
-        Debug.Log(4 / 2);
-
-
         //二维数组，保存HexGrid中每个HexCell的实例
         cells = new HexCell[height * width];
 
@@ -44,6 +40,12 @@ public class HexGrid : MonoBehaviour
                 CreateCell(x, z, i++);
             }
         }
+    }
+
+    void Start()
+    {
+        //初始化完成后，绘制整六边形
+        hexMesh.Triangulate(cells);
     }
 
     //创建单个HexCell的方法
