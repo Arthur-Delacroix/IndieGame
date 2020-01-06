@@ -25,6 +25,13 @@ public class HexGrid : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log(0 / 2);
+        Debug.Log(1 / 2);
+        Debug.Log(2 / 2);
+        Debug.Log(3 / 2);
+        Debug.Log(4 / 2);
+
+
         //二维数组，保存HexGrid中每个HexCell的实例
         cells = new HexCell[height * width];
 
@@ -43,11 +50,27 @@ public class HexGrid : MonoBehaviour
     //X数组中横向位置；Z数组中纵向位置；i该HexCell在数组是第几个
     void CreateCell(int x, int z, int i)
     {
-        //由于Plane的默认为10X10，所以每次实例化下一个HexCell时，要偏移10
         Vector3 position;
-        position.x = x * 10f;
+
+        //由于Plane的默认为10X10，所以每次实例化下一个HexCell时，要偏移10
+        //position.x = x * 10f;
+        //position.y = 0f;
+        //position.z = z * 10f;
+
+        //整六边形和正方形不同，左右两个六边形中点相距2倍内切圆半径，上下两个正六边形中点相距1.5倍外接圆半径
+        //position.x = x * (HexMetrics.innerRadius * 2f);
+
+        //这里注意，六边形块上下不是正对齐的，而是错开的
+        //上下两排 横向错开的距离，正好是内切圆半径，如下，Z表示第几排，z * HexMetrics.innerRadius 表示离初始正六边形越远，错开的距离远大
+        //此计算结果会让整体地图呈现菱形
+        //position.x = x * (HexMetrics.innerRadius * 2f) + z * HexMetrics.innerRadius;
+
+        //为了让地图整体呈现正方形，则奇数行横向从0开始，而偶数行则整体向右移动内切圆半径个单位
+        //注意，这里z * 0.5f - z / 2没没有抵消，因为z的数据类型为int，z除以2有余数是不会显示的，例如5/2结果为2
+        position.x = (x + z * 0.5f - z / 2) * (HexMetrics.innerRadius * 2f);
+
         position.y = 0f;
-        position.z = z * 10f;
+        position.z = z * (HexMetrics.outerRadius * 1.5f);
 
         //将实例化的HexCell保存在数组的相应位置
         HexCell cell = Instantiate<HexCell>(cellPrefab);
