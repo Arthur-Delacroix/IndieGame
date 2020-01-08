@@ -82,10 +82,14 @@ public class HexGrid : MonoBehaviour
         cell.transform.SetParent(transform, false);
         cell.transform.localPosition = position;
 
+        //输出该正六边形的坐标
+        cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
+
         //实例化显示HexCell坐标位置的text，并且设置其父级和位置没让text和HexCell位置相同
         Text label = Instantiate<Text>(cellLabelPrefab);
         label.rectTransform.SetParent(gridCanvas.transform, false);
         label.rectTransform.anchoredPosition = new Vector2(position.x, position.z);
-        label.text = x.ToString() + "\n" + z.ToString();
+        //label.text = "<Color=red>" + x.ToString() + "</Color>" + "\n" + "<color=blue>" + z.ToString() + "</color>";
+        label.text = cell.coordinates.ToStringOnSeparateLines();
     }
 }
