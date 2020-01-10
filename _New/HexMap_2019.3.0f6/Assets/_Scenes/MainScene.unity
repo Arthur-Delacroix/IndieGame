@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 738750868}
   - component: {fileID: 738750867}
   - component: {fileID: 738750869}
+  - component: {fileID: 738750870}
   m_Layer: 0
   m_Name: HexMesh
   m_TagString: Untagged
@@ -215,8 +216,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hexMesh: {fileID: 0}
+  meshCollider: {fileID: 738750870}
   vertices: []
   triangles: 
+--- !u!64 &738750870
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738750865}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &1018398808
 GameObject:
   m_ObjectHideFlags: 0

@@ -42,10 +42,43 @@ public class HexGrid : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Start()
     {
         //初始化完成后，绘制整六边形
         hexMesh.Triangulate(cells);
+    }
+
+    private void Update()
+    {
+        //基础的鼠标点击交互
+        if (Input.GetMouseButton(0))
+        {
+            HandleInput();
+        }
+    }
+
+    //鼠标点击后所触发的方法
+    private void HandleInput()
+    {
+        //从点击位置生成射线
+        Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        //碰撞检测的输出变量
+        RaycastHit hit;
+
+        //是否射线碰到物体，如果碰到则执行相应方法
+        if (Physics.Raycast(inputRay, out hit))
+        {
+            TouchCell(hit.point);
+        }
+    }
+
+    //射线碰到物体所调用的方法
+    private void TouchCell(Vector3 position)
+    {
+        position = transform.InverseTransformPoint(position);
+        HexCoordinates coordinates = HexCoordinates.FromPosition(position);
+        Debug.Log("touched at " + coordinates.ToString());
     }
 
     //创建单个HexCell的方法

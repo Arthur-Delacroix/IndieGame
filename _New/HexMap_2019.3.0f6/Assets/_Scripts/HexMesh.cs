@@ -6,6 +6,9 @@ public class HexMesh : MonoBehaviour
     //存储生成的Mesh的容器
     [SerializeField] private Mesh hexMesh;
 
+    //为了得到碰撞，这里要先获取自身的Mesh，通过Mesh生成Mesh Collider
+    [SerializeField] private MeshCollider meshCollider;
+
     //存储正六边形的顶点的链表
     [SerializeField] private List<Vector3> vertices;
 
@@ -42,6 +45,9 @@ public class HexMesh : MonoBehaviour
 
         //为保证视觉效果正确，需要重新根据顶点信息计算法线
         hexMesh.RecalculateNormals();
+
+        //将生成好的Mesh传给Collider，进行碰撞体的生成
+        meshCollider.sharedMesh = hexMesh;
     }
 
     //从HexMetrics的corners数组中，从六边形正上方开始，顺时针取出2个顶点信息，包括六边形中点，可以组成一个三角形
@@ -55,7 +61,7 @@ public class HexMesh : MonoBehaviour
             AddTriangle(
                 center,
                 center + HexMetrics.corners[i],
-                center + HexMetrics.corners[i+1]
+                center + HexMetrics.corners[i + 1]
             );
         }
     }
