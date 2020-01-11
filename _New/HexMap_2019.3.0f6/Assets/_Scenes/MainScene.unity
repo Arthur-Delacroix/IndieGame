@@ -174,7 +174,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b872b02366d19fc42806f7eda5648a30, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -219,6 +219,7 @@ MonoBehaviour:
   meshCollider: {fileID: 738750870}
   vertices: []
   triangles: 
+  colors: []
 --- !u!64 &738750870
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -433,6 +434,8 @@ MonoBehaviour:
     type: 3}
   gridCanvas: {fileID: 1018398812}
   hexMesh: {fileID: 738750869}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  touchedColor: {r: 1, g: 0, b: 1, a: 1}
   cells: []
 --- !u!4 &1557300706
 Transform:

@@ -15,13 +15,17 @@ public class HexMesh : MonoBehaviour
     //存储正六边形三角面片的链表
     [SerializeField] private List<int> triangles;
 
+    //存储每个正六边形元素的颜色值
+    [SerializeField]private List<Color> colors;
+
     void Awake()
     {
-        //初始化网格、顶点链表、三角面片链表
+        //初始化网格、顶点链表、三角面片链表、颜色值链表
         GetComponent<MeshFilter>().mesh = hexMesh = new Mesh();
         hexMesh.name = "Hex Mesh";
         vertices = new List<Vector3>();
         triangles = new List<int>();
+        colors = new List<Color>();
     }
 
     //绘制三角形
@@ -31,6 +35,7 @@ public class HexMesh : MonoBehaviour
         hexMesh.Clear();
         vertices.Clear();
         triangles.Clear();
+        colors.Clear();
 
         //根据数组的长度，实例化相应数量的正六边形
         for (int i = 0; i < cells.Length; i++)
@@ -42,6 +47,9 @@ public class HexMesh : MonoBehaviour
         //这里将3个顶点位置和其顺序，分别赋值给Mesh，Mesh组件会按照顶点位置和顺序绘制三角面片
         hexMesh.vertices = vertices.ToArray();
         hexMesh.triangles = triangles.ToArray();
+
+        //赋值默认颜色，赋值过程由AddTriangleColor方法执行
+        hexMesh.colors = colors.ToArray();
 
         //为保证视觉效果正确，需要重新根据顶点信息计算法线
         hexMesh.RecalculateNormals();
@@ -63,7 +71,17 @@ public class HexMesh : MonoBehaviour
                 center + HexMetrics.corners[i],
                 center + HexMetrics.corners[i + 1]
             );
+            //将每个顶点的颜色信息赋值给mesh
+            AddTriangleColor(cell.color);
         }
+    }
+
+    //为每个顶点赋值颜色信息
+    void AddTriangleColor(Color color)
+    {
+        colors.Add(color);
+        colors.Add(color);
+        colors.Add(color);
     }
 
     //分别将 顶点的位置 和 顶点的顺序，存放在相应的链表中

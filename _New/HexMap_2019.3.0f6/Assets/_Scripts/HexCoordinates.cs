@@ -77,7 +77,7 @@ public struct HexCoordinates
 
     public static HexCoordinates FromPosition(Vector3 position)
     {
-        //X坐标是 X世界坐标 除以 两倍的内切圆半径
+        //六边形内X坐标是 Unity X坐标 除以 两倍的内切圆半径
         float x = position.x / (HexMetrics.innerRadius * 2f);
 
         //从这里开始懵逼

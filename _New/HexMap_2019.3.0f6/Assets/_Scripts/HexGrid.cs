@@ -23,6 +23,11 @@ public class HexGrid : MonoBehaviour
     //存储正六边形网格生成器脚本
     [SerializeField] private HexMesh hexMesh;
 
+    //默认颜色
+    public Color defaultColor = Color.white;
+    //点击之后的颜色
+    public Color touchedColor = Color.magenta;
+
     //保存每个HexCell的实例的数组
     [SerializeField] private HexCell[] cells;
 
@@ -78,6 +83,13 @@ public class HexGrid : MonoBehaviour
     {
         position = transform.InverseTransformPoint(position);
         HexCoordinates coordinates = HexCoordinates.FromPosition(position);
+
+        //这里没注释
+        int index = coordinates.X + coordinates.Z * width + coordinates.Z / 2;
+        HexCell cell = cells[index];
+        cell.color = touchedColor;
+        hexMesh.Triangulate(cells);
+
         Debug.Log("touched at " + coordinates.ToString());
     }
 
@@ -117,6 +129,9 @@ public class HexGrid : MonoBehaviour
 
         //输出该正六边形的坐标
         cell.coordinates = HexCoordinates.FromOffsetCoordinates(x, z);
+
+        //赋初始颜色值
+        cell.color = defaultColor;
 
         //实例化显示HexCell坐标位置的text，并且设置其父级和位置没让text和HexCell位置相同
         Text label = Instantiate<Text>(cellLabelPrefab);
