@@ -15,13 +15,13 @@ public class HexGrid : MonoBehaviour
     public HexCell cellPrefab;
 
     //调试用的坐标显示文本Prefab
-    [SerializeField] private Text cellLabelPrefab;
+    [SerializeField] private Text cellLabelPrefab = null;
 
     //显示坐标TEXT的Canvas组件
-    [SerializeField] private Canvas gridCanvas;
+    [SerializeField] private Canvas gridCanvas = null;
 
     //存储正六边形网格生成器脚本
-    [SerializeField] private HexMesh hexMesh;
+    [SerializeField] private HexMesh hexMesh = null;
 
     //默认颜色
     public Color defaultColor = Color.white;

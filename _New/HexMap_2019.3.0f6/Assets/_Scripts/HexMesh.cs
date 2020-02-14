@@ -7,7 +7,7 @@ public class HexMesh : MonoBehaviour
     [SerializeField] private Mesh hexMesh;
 
     //为了得到碰撞，这里要先获取自身的Mesh，通过Mesh生成Mesh Collider
-    [SerializeField] private MeshCollider meshCollider;
+    [SerializeField] private MeshCollider meshCollider = null;
 
     //存储正六边形的顶点的链表
     [SerializeField] private List<Vector3> vertices;
@@ -16,7 +16,7 @@ public class HexMesh : MonoBehaviour
     [SerializeField] private List<int> triangles;
 
     //存储每个正六边形元素的颜色值
-    [SerializeField]private List<Color> colors;
+    [SerializeField] private List<Color> colors;
 
     void Awake()
     {
