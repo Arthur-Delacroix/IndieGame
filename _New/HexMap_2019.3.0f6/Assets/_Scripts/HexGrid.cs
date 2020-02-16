@@ -151,6 +151,40 @@ public class HexGrid : MonoBehaviour
         //赋初始颜色值
         cell.color = defaultColor;
 
+        //添加每个地图块相邻的地图块，类似链表
+        //这里是添加其左侧的(W)，最左面的的是没有左侧相邻的，所以要进行判断
+        if (x > 0)
+        {
+            cell.SetNeighbor(HexDirection.W, cells[i - 1]);
+        }
+
+
+        if (z > 0)
+        {
+            //建立SE方位链接
+            //除了第一行(最下面一行)，每个偶数行都会有SE方位链接
+            //& 符号为 位运算符 参考https://blog.csdn.net/pq8888168/article/details/82116450
+            if ((z & 1) == 0)
+            {
+                cell.SetNeighbor(HexDirection.SE, cells[i - width]);
+
+                //建立SW方位链接
+                //在偶数行(除了第0行)，每行开头的第一个是没有SW相邻
+                if (x > 0)
+                {
+                    cell.SetNeighbor(HexDirection.SW, cells[i - width - 1]);
+                }
+            }
+            else
+            {
+                cell.SetNeighbor(HexDirection.SW, cells[i - width]);
+                if (x < width - 1)
+                {
+                    cell.SetNeighbor(HexDirection.SE, cells[i - width + 1]);
+                }
+            }
+        }
+
         //实例化显示HexCell坐标位置的text，并且设置其父级和位置没让text和HexCell位置相同
         Text label = Instantiate<Text>(cellLabelPrefab);
         label.rectTransform.SetParent(gridCanvas.transform, false);
