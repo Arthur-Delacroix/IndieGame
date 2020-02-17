@@ -168,7 +168,7 @@ public class HexGrid : MonoBehaviour
             {
                 cell.SetNeighbor(HexDirection.SE, cells[i - width]);
 
-                //建立SW方位链接
+                //建立SW方位链接(左下)
                 //在偶数行(除了第0行)，每行开头的第一个是没有SW相邻
                 if (x > 0)
                 {

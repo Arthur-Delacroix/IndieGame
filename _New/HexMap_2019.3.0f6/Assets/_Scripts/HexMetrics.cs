@@ -13,7 +13,7 @@ public static class HexMetrics
 
     //中间的整六边形地图块顶点朝上
     //从正上方顶点开始,顺时针排列，记录每个顶点的位置
-    public static Vector3[] corners =
+    private static Vector3[] corners =
     {
         new Vector3(0f, 0f, outerRadius),
         new Vector3(innerRadius, 0f, 0.5f * outerRadius),
@@ -27,4 +27,14 @@ public static class HexMetrics
         //因为每次从最上方顶点开始，顺时针依次取出两个顶点，加上中点，绘制三角形，最后一个三角形的顶点与第一个三角形顶点重合
         new Vector3(0f, 0f, outerRadius)
     };
+
+    public static Vector3 GetFirstCorner(HexDirection direction)
+    {
+        return corners[(int)direction];
+    }
+
+    public static Vector3 GetSecondCorner(HexDirection direction)
+    {
+        return corners[(int)direction + 1];
+    }
 }

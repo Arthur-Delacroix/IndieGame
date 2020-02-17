@@ -18,7 +18,7 @@ public class HexMesh : MonoBehaviour
     //存储每个正六边形元素的颜色值
     [SerializeField] private List<Color> colors;
 
-    void Awake()
+    private void Awake()
     {
         //初始化网格、顶点链表、三角面片链表、颜色值链表
         GetComponent<MeshFilter>().mesh = hexMesh = new Mesh();
@@ -58,8 +58,17 @@ public class HexMesh : MonoBehaviour
         meshCollider.sharedMesh = hexMesh;
     }
 
-    //从HexMetrics的corners数组中，从六边形正上方开始，顺时针取出2个顶点信息，包括六边形中点，可以组成一个三角形
+    //为每个顶点附加方位值
     void Triangulate(HexCell cell)
+    {
+        for (HexDirection d = HexDirection.NE; d <= HexDirection.NW; d++)
+        {
+            Triangulate(d, cell);
+        }
+    }
+
+    //从HexMetrics的corners数组中，从六边形正上方开始，顺时针取出2个顶点信息，包括六边形中点，可以组成一个三角形
+    private void Triangulate(HexDirection direction, HexCell cell)
     {
         Vector3 center = cell.transform.localPosition;
 
@@ -68,8 +77,8 @@ public class HexMesh : MonoBehaviour
         {
             AddTriangle(
                 center,
-                center + HexMetrics.corners[i],
-                center + HexMetrics.corners[i + 1]
+                center + HexMetrics.GetFirstCorner(direction),
+                center + HexMetrics.GetSecondCorner(direction)
             );
             //将每个顶点的颜色信息赋值给mesh
             AddTriangleColor(cell.color);
@@ -77,7 +86,7 @@ public class HexMesh : MonoBehaviour
     }
 
     //为每个顶点赋值颜色信息
-    void AddTriangleColor(Color color)
+    private void AddTriangleColor(Color color)
     {
         colors.Add(color);
         colors.Add(color);
@@ -85,7 +94,7 @@ public class HexMesh : MonoBehaviour
     }
 
     //分别将 顶点的位置 和 顶点的顺序，存放在相应的链表中
-    void AddTriangle(Vector3 v1, Vector3 v2, Vector3 v3)
+    private void AddTriangle(Vector3 v1, Vector3 v2, Vector3 v3)
     {
         int vertexIndex = vertices.Count;
         vertices.Add(v1);
