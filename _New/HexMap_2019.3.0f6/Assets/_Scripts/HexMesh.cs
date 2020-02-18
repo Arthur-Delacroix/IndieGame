@@ -80,17 +80,23 @@ public class HexMesh : MonoBehaviour
                 center + HexMetrics.GetFirstCorner(direction),
                 center + HexMetrics.GetSecondCorner(direction)
             );
+
             //将每个顶点的颜色信息赋值给mesh
-            AddTriangleColor(cell.color);
+            //AddTriangleColor(cell.color);
+
+            //HexCell neighbor = cell.GetNeighbor(direction);
+
+            HexCell neighbor = cell.GetNeighbor(direction) ?? cell;
+            AddTriangleColor(cell.color, neighbor.color, neighbor.color);
         }
     }
 
     //为每个顶点赋值颜色信息
-    private void AddTriangleColor(Color color)
+    private void AddTriangleColor(Color c1, Color c2, Color c3)
     {
-        colors.Add(color);
-        colors.Add(color);
-        colors.Add(color);
+        colors.Add(c1);
+        colors.Add(c2);
+        colors.Add(c3);
     }
 
     //分别将 顶点的位置 和 顶点的顺序，存放在相应的链表中
