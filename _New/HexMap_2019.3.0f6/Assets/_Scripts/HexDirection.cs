@@ -23,4 +23,14 @@ public static class HexDirectionExtensions
             return (direction - 3);
         }
     }
+
+    public static HexDirection Previous(this HexDirection direction)
+    {
+        return direction == HexDirection.NE ? HexDirection.NW : (direction - 1);
+    }
+
+    public static HexDirection Next(this HexDirection direction)
+    {
+        return direction == HexDirection.NW ? HexDirection.NE : (direction + 1);
+    }
 }
