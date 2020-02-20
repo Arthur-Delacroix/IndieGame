@@ -25,8 +25,10 @@ public class HexGrid : MonoBehaviour
 
     //默认颜色
     public Color defaultColor = Color.white;
+
     //点击之后的颜色
-    public Color touchedColor = Color.magenta;
+    //移动到其他脚本中实现
+    //public Color touchedColor = Color.magenta;
 
     //保存每个HexCell的实例的数组
     [SerializeField] private HexCell[] cells;
@@ -53,6 +55,8 @@ public class HexGrid : MonoBehaviour
         hexMesh.Triangulate(cells);
     }
 
+    /*
+    此方法移动到了HexMapEditor脚本中
     private void Update()
     {
         //基础的鼠标点击交互
@@ -77,17 +81,31 @@ public class HexGrid : MonoBehaviour
             TouchCell(hit.point);
         }
     }
+    */
 
     //射线碰到物体所调用的方法
-    private void TouchCell(Vector3 position)
+    //private void TouchCell(Vector3 position)
+    //{
+    //    position = transform.InverseTransformPoint(position);
+    //    HexCoordinates coordinates = HexCoordinates.FromPosition(position);
+
+    //    //这里没注释
+    //    int index = coordinates.X + coordinates.Z * width + coordinates.Z / 2;
+    //    HexCell cell = cells[index];
+    //    cell.color = touchedColor;
+    //    hexMesh.Triangulate(cells);
+
+    //    Debug.Log("touched at " + coordinates.ToString());
+    //}
+
+    public void ColorCell(Vector3 position, Color color)
     {
         position = transform.InverseTransformPoint(position);
         HexCoordinates coordinates = HexCoordinates.FromPosition(position);
 
-        //这里没注释
         int index = coordinates.X + coordinates.Z * width + coordinates.Z / 2;
         HexCell cell = cells[index];
-        cell.color = touchedColor;
+        cell.color = color;
         hexMesh.Triangulate(cells);
 
         Debug.Log("touched at " + coordinates.ToString());
