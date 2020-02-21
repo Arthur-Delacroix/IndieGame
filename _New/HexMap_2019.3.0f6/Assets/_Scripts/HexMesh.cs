@@ -75,10 +75,17 @@ public class HexMesh : MonoBehaviour
         //包括中点，每次取出3个顶点，依次存放到链表中
         for (int i = 0; i < 6; i++)
         {
+            //AddTriangle(
+            //    center,
+            //    center + HexMetrics.GetFirstCorner(direction),
+            //    center + HexMetrics.GetSecondCorner(direction)
+            //);
+
+            //新的创建三角面片的方法，因为新增了颜色混合区域，这里使用经过系数修正的外接圆半径，而非原始的外接圆半径
             AddTriangle(
                 center,
-                center + HexMetrics.GetFirstCorner(direction),
-                center + HexMetrics.GetSecondCorner(direction)
+                center + HexMetrics.GetFirstSolidCorner(direction),
+                center + HexMetrics.GetSecondSolidCorner(direction)
             );
 
             //将每个顶点的颜色信息赋值给mesh
