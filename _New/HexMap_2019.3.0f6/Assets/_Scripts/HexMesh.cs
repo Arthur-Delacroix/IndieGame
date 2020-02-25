@@ -77,8 +77,14 @@ public class HexMesh : MonoBehaviour
         Vector3 v2 = center + HexMetrics.GetSecondSolidCorner(direction);
 
         //混合区域外顶点位置信息
-        Vector3 v3 = center + HexMetrics.GetFirstCorner(direction);
-        Vector3 v4 = center + HexMetrics.GetSecondCorner(direction);
+        //Vector3 v3 = center + HexMetrics.GetFirstCorner(direction);
+        //Vector3 v4 = center + HexMetrics.GetSecondCorner(direction);
+
+        //新的 颜色混合区域
+        //这里是矩形的
+        Vector3 bridge = HexMetrics.GetBridge(direction);
+        Vector3 v3 = v1 + bridge;
+        Vector3 v4 = v2 + bridge;
 
         //包括中点，每次取出3个顶点，依次存放到链表中
         for (int i = 0; i < 6; i++)
@@ -126,12 +132,15 @@ public class HexMesh : MonoBehaviour
             AddTriangleColor(cell.color);
 
             //混合区域顶点颜色赋值
-            AddQuadColor(
-                cell.color,
-                cell.color,
-                (cell.color + prevNeighbor.color + neighbor.color) / 3f,
-                (cell.color + neighbor.color + nextNeighbor.color) / 3f
-             );
+            //AddQuadColor(
+            //    cell.color,
+            //    cell.color,
+            //    (cell.color + prevNeighbor.color + neighbor.color) / 3f,
+            //    (cell.color + neighbor.color + nextNeighbor.color) / 3f
+            // );
+
+            //颜色混合区域只混合相邻的cell的颜色
+            AddQuadColor(cell.color, (cell.color + neighbor.color) * 0.5f);
         }
     }
 
@@ -180,11 +189,20 @@ public class HexMesh : MonoBehaviour
     }
 
     //颜色混合区域 顶点颜色信息
-    void AddQuadColor(Color c1, Color c2, Color c3, Color c4)
+    //void AddQuadColor(Color c1, Color c2, Color c3, Color c4)
+    //{
+    //    colors.Add(c1);
+    //    colors.Add(c2);
+    //    colors.Add(c3);
+    //    colors.Add(c4);
+    //}
+
+    //该矩形区域只需要混合两个颜色，即相邻的两个cell之间的颜色
+    private void AddQuadColor(Color c1, Color c2)
     {
         colors.Add(c1);
+        colors.Add(c1);
         colors.Add(c2);
-        colors.Add(c3);
-        colors.Add(c4);
+        colors.Add(c2);
     }
 }
