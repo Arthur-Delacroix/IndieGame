@@ -54,6 +54,8 @@ public static class HexMetrics
         return corners[(int)direction + 1] * solidFactor;
     }
 
+    //https://catlikecoding.com/unity/tutorials/hex-map/part-2/blend-regions/edge-bridge.png
+    //获得V3 V4的位置
     public static Vector3 GetBridge(HexDirection direction)
     {
         return (corners[(int)direction] + corners[(int)direction + 1]) *

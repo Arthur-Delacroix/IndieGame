@@ -140,7 +140,25 @@ public class HexMesh : MonoBehaviour
             // );
 
             //颜色混合区域只混合相邻的cell的颜色
-            AddQuadColor(cell.color, (cell.color + neighbor.color) * 0.5f);
+            //AddQuadColor(cell.color, (cell.color + neighbor.color) * 0.5f);
+
+            //加入了 三个颜色混合区域
+            Color bridgeColor = (cell.color + neighbor.color) * 0.5f;
+            AddQuadColor(cell.color, bridgeColor);
+
+            AddTriangle(v1, center + HexMetrics.GetFirstCorner(direction), v3);
+            AddTriangleColor(
+                cell.color,
+                (cell.color + prevNeighbor.color + neighbor.color) / 3f,
+                bridgeColor
+            );
+
+            AddTriangle(v2, v4, center + HexMetrics.GetSecondCorner(direction));
+            AddTriangleColor(
+                cell.color,
+                bridgeColor,
+                (cell.color + neighbor.color + nextNeighbor.color) / 3f
+            );
         }
     }
 
