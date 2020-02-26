@@ -58,7 +58,7 @@ public static class HexMetrics
     //获得V3 V4的位置
     public static Vector3 GetBridge(HexDirection direction)
     {
-        return (corners[(int)direction] + corners[(int)direction + 1]) *
-            0.5f * blendFactor;
+        //return (corners[(int)direction] + corners[(int)direction + 1]) * 0.5f * blendFactor;
+        return (corners[(int)direction] + corners[(int)direction + 1]) * blendFactor;
     }
 }
