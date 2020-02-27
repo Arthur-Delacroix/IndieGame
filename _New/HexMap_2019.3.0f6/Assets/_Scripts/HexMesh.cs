@@ -259,5 +259,16 @@ public class HexMesh : MonoBehaviour
 
         AddQuad(v1, v2, v3, v4);
         AddQuadColor(cell.color, neighbor.color);
+
+        HexCell nextNeighbor = cell.GetNeighbor(direction.Next());
+        if (direction <= HexDirection.E && nextNeighbor != null)
+        {
+            AddTriangle(v2, v4, v2 + HexMetrics.GetBridge(direction.Next()));
+
+            //AddTriangle(v2, v4, v2);
+            AddTriangleColor(cell.color, neighbor.color, nextNeighbor.color);
+        }
+
+
     }
 }
