@@ -98,17 +98,26 @@ public class HexGrid : MonoBehaviour
     //    Debug.Log("touched at " + coordinates.ToString());
     //}
 
-    public void ColorCell(Vector3 position, Color color)
+    //public void ColorCell(Vector3 position, Color color)
+    //{
+    //    position = transform.InverseTransformPoint(position);
+    //    HexCoordinates coordinates = HexCoordinates.FromPosition(position);
+
+    //    int index = coordinates.X + coordinates.Z * width + coordinates.Z / 2;
+    //    HexCell cell = cells[index];
+    //    cell.color = color;
+    //    hexMesh.Triangulate(cells);
+
+    //    Debug.Log("touched at " + coordinates.ToString());
+    //}
+
+    //获取单个HexCell
+    public HexCell GetCell(Vector3 position)
     {
         position = transform.InverseTransformPoint(position);
         HexCoordinates coordinates = HexCoordinates.FromPosition(position);
-
         int index = coordinates.X + coordinates.Z * width + coordinates.Z / 2;
-        HexCell cell = cells[index];
-        cell.color = color;
-        hexMesh.Triangulate(cells);
-
-        Debug.Log("touched at " + coordinates.ToString());
+        return cells[index];
     }
 
     //创建单个HexCell的方法
@@ -157,7 +166,6 @@ public class HexGrid : MonoBehaviour
         {
             cell.SetNeighbor(HexDirection.W, cells[i - 1]);
         }
-
 
         if (z > 0)
         {

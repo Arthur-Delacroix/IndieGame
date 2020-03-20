@@ -11,6 +11,12 @@ public class HexCell : MonoBehaviour
     //存储相邻的六个地图块
     [SerializeField] private HexCell[] neighbors = null;
 
+    //HexCell的海拔高度
+    public int elevation;
+
+    //海拔高度之间的跨度
+    public const float elevationStep = 5f;
+
     //根据方位 获取其相邻的地图块
     public HexCell GetNeighbor(HexDirection direction)
     {
