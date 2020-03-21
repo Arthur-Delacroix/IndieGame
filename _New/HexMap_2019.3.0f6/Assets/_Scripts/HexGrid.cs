@@ -120,6 +120,12 @@ public class HexGrid : MonoBehaviour
         return cells[index];
     }
 
+    //在改变HexCell高度之后，要刷新整个地图，保证数据正确显示
+    public void Refresh()
+    {
+        hexMesh.Triangulate(cells);
+    }
+
     //创建单个HexCell的方法
     //X数组中横向位置；Z数组中纵向位置；i该HexCell在数组是第几个
     void CreateCell(int x, int z, int i)
