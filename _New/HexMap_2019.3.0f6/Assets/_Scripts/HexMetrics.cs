@@ -16,6 +16,9 @@ public static class HexMetrics
     public const float solidFactor = 0.75f;
     public const float blendFactor = 1f - solidFactor;
 
+    //海拔高度之间的跨度
+    public const float elevationStep = 5f;
+
     //中间的整六边形地图块顶点朝上
     //从正上方顶点开始,顺时针排列，记录每个顶点的位置
     private static Vector3[] corners =

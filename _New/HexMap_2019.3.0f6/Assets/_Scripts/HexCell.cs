@@ -12,10 +12,7 @@ public class HexCell : MonoBehaviour
     [SerializeField] private HexCell[] neighbors = null;
 
     //HexCell的海拔高度
-    public int elevation;
-
-    //海拔高度之间的跨度
-    public const float elevationStep = 5f;
+    private int elevation;
 
     //根据方位 获取其相邻的地图块
     public HexCell GetNeighbor(HexDirection direction)
@@ -30,5 +27,20 @@ public class HexCell : MonoBehaviour
     {
         neighbors[(int)direction] = cell;
         cell.neighbors[(int)direction.Opposite()] = this;
+    }
+
+    public int Elevation
+    {
+        get
+        {
+            return elevation;
+        }
+        set
+        {
+            elevation = value;
+            Vector3 position = transform.localPosition;
+            position.y = value * HexMetrics.elevationStep;
+            transform.localPosition = position;
+        }
     }
 }
