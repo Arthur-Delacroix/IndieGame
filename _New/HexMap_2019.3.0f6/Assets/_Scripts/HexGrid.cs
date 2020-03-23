@@ -132,6 +132,8 @@ public class HexGrid : MonoBehaviour
     {
         Vector3 position;
 
+        
+
         //由于Plane的默认为10X10，所以每次实例化下一个HexCell时，要偏移10
         //position.x = x * 10f;
         //position.y = 0f;
@@ -197,6 +199,7 @@ public class HexGrid : MonoBehaviour
                     cell.SetNeighbor(HexDirection.SE, cells[i - width + 1]);
                 }
             }
+
         }
 
         //实例化显示HexCell坐标位置的text，并且设置其父级和位置没让text和HexCell位置相同
@@ -205,5 +208,8 @@ public class HexGrid : MonoBehaviour
         label.rectTransform.anchoredPosition = new Vector2(position.x, position.z);
         //label.text = "<Color=red>" + x.ToString() + "</Color>" + "\n" + "<color=blue>" + z.ToString() + "</color>";
         label.text = cell.coordinates.ToStringOnSeparateLines();
+
+        //重新为小时坐标的UI赋值高度，让其和自身的HexCell高度相统一
+        cell.uiRect = label.rectTransform;
     }
 }

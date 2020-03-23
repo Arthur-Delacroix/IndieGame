@@ -14,6 +14,9 @@ public class HexCell : MonoBehaviour
     //HexCell的海拔高度
     private int elevation;
 
+    //为了让显示HexCell的坐标跟随HexCell，必须要存储其坐标
+    public RectTransform uiRect;
+
     //根据方位 获取其相邻的地图块
     public HexCell GetNeighbor(HexDirection direction)
     {
@@ -41,6 +44,10 @@ public class HexCell : MonoBehaviour
             Vector3 position = transform.localPosition;
             position.y = value * HexMetrics.elevationStep;
             transform.localPosition = position;
+
+            Vector3 uiPosition = uiRect.localPosition;
+            uiPosition.z = elevation * -HexMetrics.elevationStep;
+            uiRect.localPosition = uiPosition;
         }
     }
 }
