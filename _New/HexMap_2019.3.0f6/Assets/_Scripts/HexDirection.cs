@@ -1,4 +1,5 @@
-﻿public enum HexDirection
+﻿//描述每个正六边形HexCell的方位
+public enum HexDirection
 {
     NE,
     E,
@@ -6,6 +7,14 @@
     SW,
     W,
     NW
+}
+
+//面数三种不同的高差类型
+public enum HexEdgeType
+{
+    Flat,
+    Slope,
+    Cliff
 }
 
 public static class HexDirectionExtensions

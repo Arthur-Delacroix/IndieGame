@@ -99,4 +99,19 @@ public static class HexMetrics
         float h = step * HexMetrics.horizontalTerraceStepSize;
         return Color.Lerp(a, b, h);
     }
+
+    //判断两个相邻的HexCell之间的连接类型
+    public static HexEdgeType GetEdgeType(int elevation1, int elevation2)
+    {
+        if (elevation1 == elevation2)
+        {
+            return HexEdgeType.Flat;
+        }
+        int delta = elevation2 - elevation1;
+        if (delta == 1 || delta == -1)
+        {
+            return HexEdgeType.Slope;
+        }
+        return HexEdgeType.Cliff;
+    }
 }

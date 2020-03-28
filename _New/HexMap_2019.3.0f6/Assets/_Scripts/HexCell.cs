@@ -50,4 +50,12 @@ public class HexCell : MonoBehaviour
             uiRect.localPosition = uiPosition;
         }
     }
+
+    //获取当前HexCell指定方位上，矩形连接区域的类型
+    public HexEdgeType GetEdgeType(HexDirection direction)
+    {
+        return HexMetrics.GetEdgeType(
+            elevation, neighbors[(int)direction].elevation
+        );
+    }
 }
