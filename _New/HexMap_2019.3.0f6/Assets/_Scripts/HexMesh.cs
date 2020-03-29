@@ -296,7 +296,16 @@ public class HexMesh : MonoBehaviour
 
         v3.y = v4.y = neighbor.Elevation * HexMetrics.elevationStep;
 
-        TriangulateEdgeTerraces(v1, v2, cell, v3, v4, neighbor);
+        //TriangulateEdgeTerraces(v1, v2, cell, v3, v4, neighbor);
+        if (cell.GetEdgeType(direction) == HexEdgeType.Slope)
+        {
+            TriangulateEdgeTerraces(v1, v2, cell, v3, v4, neighbor);
+        }
+        else
+        {
+            AddQuad(v1, v2, v3, v4);
+            AddQuadColor(cell.color, neighbor.color);
+        }
 
         HexCell nextNeighbor = cell.GetNeighbor(direction.Next());
         if (direction <= HexDirection.E && nextNeighbor != null)
@@ -312,9 +321,7 @@ public class HexMesh : MonoBehaviour
         }
     }
 
-    private void TriangulateEdgeTerraces(
-        Vector3 beginLeft, Vector3 beginRight, HexCell beginCell,
-        Vector3 endLeft, Vector3 endRight, HexCell endCell)
+    private void TriangulateEdgeTerraces(Vector3 beginLeft, Vector3 beginRight, HexCell beginCell, Vector3 endLeft, Vector3 endRight, HexCell endCell)
     {
         Vector3 v3 = HexMetrics.TerraceLerp(beginLeft, endLeft, 1);
         Vector3 v4 = HexMetrics.TerraceLerp(beginRight, endRight, 1);
