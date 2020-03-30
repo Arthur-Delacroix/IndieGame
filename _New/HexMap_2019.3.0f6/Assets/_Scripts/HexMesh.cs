@@ -317,6 +317,27 @@ public class HexMesh : MonoBehaviour
             //AddTriangle(v2, v4, v2 + HexMetrics.GetBridge(direction.Next()));
 
             //AddTriangle(v2, v4, v2);
+
+            if (cell.Elevation <= neighbor.Elevation)
+            {
+                if (cell.Elevation <= nextNeighbor.Elevation)
+                {
+                    TriangulateCorner(v2, cell, v4, neighbor, v5, nextNeighbor);
+                }
+                else
+                {
+                    TriangulateCorner(v5, nextNeighbor, v2, cell, v4, neighbor);
+                }
+            }
+            else if (neighbor.Elevation <= nextNeighbor.Elevation)
+            {
+                TriangulateCorner(v4, neighbor, v5, nextNeighbor, v2, cell);
+            }
+            else
+            {
+                TriangulateCorner(v5, nextNeighbor, v2, cell, v4, neighbor);
+            }
+
             AddTriangleColor(cell.color, neighbor.color, nextNeighbor.color);
         }
     }
@@ -344,5 +365,18 @@ public class HexMesh : MonoBehaviour
 
         AddQuad(v3, v4, endLeft, endRight);
         AddQuadColor(c2, endCell.color);
+    }
+
+
+    //此部分为三角形连接区域的相关内容
+
+    void TriangulateCorner(
+        Vector3 bottom, HexCell bottomCell,
+        Vector3 left, HexCell leftCell,
+        Vector3 right, HexCell rightCell
+    )
+    {
+        AddTriangle(bottom, left, right);
+        AddTriangleColor(bottomCell.color, leftCell.color, rightCell.color);
     }
 }
