@@ -58,4 +58,12 @@ public class HexCell : MonoBehaviour
             elevation, neighbors[(int)direction].elevation
         );
     }
+
+    //判断两个相邻的HexCell的相对高度
+    public HexEdgeType GetEdgeType(HexCell otherCell)
+    {
+        return HexMetrics.GetEdgeType(
+            elevation, otherCell.elevation
+        );
+    }
 }
