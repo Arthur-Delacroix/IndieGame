@@ -378,11 +378,7 @@ public class HexMesh : MonoBehaviour
 
     //此部分为三角形连接区域的相关内容
 
-    private void TriangulateCorner(
-        Vector3 bottom, HexCell bottomCell,
-        Vector3 left, HexCell leftCell,
-        Vector3 right, HexCell rightCell
-    )
+    private void TriangulateCorner(Vector3 bottom, HexCell bottomCell, Vector3 left, HexCell leftCell, Vector3 right, HexCell rightCell)
     {
         HexEdgeType leftEdgeType = bottomCell.GetEdgeType(leftCell);
         HexEdgeType rightEdgeType = bottomCell.GetEdgeType(rightCell);
@@ -391,26 +387,22 @@ public class HexMesh : MonoBehaviour
         {
             if (rightEdgeType == HexEdgeType.Slope)
             {
-                TriangulateCornerTerraces(
-                    bottom, bottomCell, left, leftCell, right, rightCell
-                );
+                TriangulateCornerTerraces(bottom, bottomCell, left, leftCell, right, rightCell);
                 return;
             }
             if (rightEdgeType == HexEdgeType.Flat)
             {
-                TriangulateCornerTerraces(
-                    left, leftCell, right, rightCell, bottom, bottomCell
-                );
+                TriangulateCornerTerraces(left, leftCell, right, rightCell, bottom, bottomCell);
                 return;
             }
+            TriangulateCornerTerracesCliff(bottom, bottomCell, left, leftCell, right, rightCell);
+            return;
         }
         if (rightEdgeType == HexEdgeType.Slope)
         {
             if (leftEdgeType == HexEdgeType.Flat)
             {
-                TriangulateCornerTerraces(
-                    right, rightCell, bottom, bottomCell, left, leftCell
-                );
+                TriangulateCornerTerraces(right, rightCell, bottom, bottomCell, left, leftCell);
                 return;
             }
         }
@@ -419,11 +411,7 @@ public class HexMesh : MonoBehaviour
         AddTriangleColor(bottomCell.color, leftCell.color, rightCell.color);
     }
 
-    private void TriangulateCornerTerraces(
-        Vector3 begin, HexCell beginCell,
-        Vector3 left, HexCell leftCell,
-        Vector3 right, HexCell rightCell
-    )
+    private void TriangulateCornerTerraces(Vector3 begin, HexCell beginCell, Vector3 left, HexCell leftCell, Vector3 right, HexCell rightCell)
     {
         Vector3 v3 = HexMetrics.TerraceLerp(begin, left, 1);
         Vector3 v4 = HexMetrics.TerraceLerp(begin, right, 1);
@@ -449,5 +437,17 @@ public class HexMesh : MonoBehaviour
 
         AddQuad(v3, v4, left, right);
         AddQuadColor(c3, c4, leftCell.color, rightCell.color);
+    }
+
+    //处理以下两种情况
+    //B为0，L为1，R为2。
+    //B为0，L为1，R大于2。
+    private void TriangulateCornerTerracesCliff(
+        Vector3 begin, HexCell beginCell,
+        Vector3 left, HexCell leftCell,
+        Vector3 right, HexCell rightCell
+    )
+    {
+
     }
 }
