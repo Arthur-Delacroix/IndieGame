@@ -9,3 +9,5 @@ Temp
 *.csproj
 *.sln
 ~$*.doc
+*.tmp
+_New/~$论文初稿.docx
