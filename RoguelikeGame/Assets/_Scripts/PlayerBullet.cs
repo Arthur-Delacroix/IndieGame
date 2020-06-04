@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+#pragma warning disable 649
+
 public class PlayerBullet : MonoBehaviour
 {
     //子弹速度
@@ -10,13 +12,17 @@ public class PlayerBullet : MonoBehaviour
     //子弹的刚体组件
     [SerializeField] private Rigidbody2D theRB;
 
-    // Start is called before the first frame update
+    //子弹打击到墙面后的特效
+    [SerializeField] private GameObject impactEffect;
+
+    //子弹的伤害值
+    [SerializeField] private int damageToGive;
+
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         //为刚体设置初始速度的正方向
@@ -24,6 +30,18 @@ public class PlayerBullet : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other)
+    {
+        Instantiate(impactEffect, transform.position, transform.rotation);
+
+        Destroy(gameObject);
+
+        if (other.tag == "Enemy")
+        {
+            other.GetComponent<EnemyController>().DamageEnemy(damageToGive);
+        }
+    }
+
+    private void OnBecameInvisible()
     {
         Destroy(gameObject);
     }

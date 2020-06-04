@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+#pragma warning disable 649
+
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController ins;
+
     //人物的移动速度
     [SerializeField] private float moveSpeed;
 
@@ -34,6 +38,11 @@ public class PlayerController : MonoBehaviour
 
     //这个变量用来触发连续射击
     private float shotCounter;
+
+    private void Awake()
+    {
+        ins = this;
+    }
 
     void Start()
     {

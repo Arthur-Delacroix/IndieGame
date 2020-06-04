@@ -16,3 +16,7 @@ translation duration 两段动画融合过渡的时长
 
 可以在Animator的Parameters标签中创建变量
 例如创建了bool类型的变量，在代码中可以通过anim.SetBool("isMoving", true);语句为该变量赋值
+
+OnBecameInvisible 当gameobject消失在屏幕内触发的事件
+
+Random.Range参数，min包含，max排除
