@@ -6,3 +6,13 @@ Filter Mode 当该纹理由于3D变换进行拉伸时，它将如何被过滤插
 Point 单点插值，纹理将变得块状化（blocky up close）；
 Bilinear 双线性插值，纹理将变得模糊（blurry up close）；
 Trilinear 三线性插值，类似Bilinear，但是纹理还会在不同的mip水平之间（between the different mip levels）进行模糊；
+
+- 在控制人物移动的时候，不要强行控制人物的position，而是控制刚体组件，这样就不会存在被物体挡住产生抖动的情况了
+
+- Animator 相关
+一个物体有多个animation clip的情况下，会使用到Animator进行各个动画之间的切换
+在两个动画之间的transition，选中后，inspector面板中关闭has Exit Time（无退出等待时间，立即开启下一动画）
+translation duration 两段动画融合过渡的时长
+
+可以在Animator的Parameters标签中创建变量
+例如创建了bool类型的变量，在代码中可以通过anim.SetBool("isMoving", true);语句为该变量赋值
