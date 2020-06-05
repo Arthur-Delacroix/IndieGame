@@ -8,8 +8,21 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController ins;
 
-    //人物的移动速度
+    //人物的普通移动速度
     [SerializeField] private float moveSpeed;
+
+    //人物冲刺时候的速度
+    [SerializeField] private float dashSpeed;
+    //冲刺的持续时间
+    [SerializeField] private float dashDuration;
+    //冲刺技能冷却时间
+    [SerializeField] private float dashCooldown;
+    //冲刺中的无敌时间
+    [SerializeField] private float dashInvincibility;
+    //技能持续时间的计数器
+    private float dashCounter;
+    //技能冷却时间计数器
+    private float dashCooldownCounter;
 
     //人物移动方向
     private Vector2 moveInput;
@@ -39,6 +52,12 @@ public class PlayerController : MonoBehaviour
     //这个变量用来触发连续射击
     private float shotCounter;
 
+    //身体的sprite组件，用来显示中弹后无敌时间的效果
+    public SpriteRenderer bodySR;
+
+    //人物的实际速度
+    private float activeMoveSpeed;
+
     private void Awake()
     {
         ins = this;
@@ -46,7 +65,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-
+        activeMoveSpeed = moveSpeed;
     }
 
     void Update()
@@ -67,7 +86,7 @@ public class PlayerController : MonoBehaviour
         // gameObject.transform.position += new Vector3(moveInput.x * Time.deltaTime * moveSpeed, moveInput.y * Time.deltaTime * moveSpeed, 0f);
 
         //为人物刚体增加位移
-        theRB.velocity = moveInput * moveSpeed;
+        theRB.velocity = moveInput * activeMoveSpeed;
 
         //将鼠标的位置转换到游戏屏幕内的坐标
         Vector3 mousePos = Input.mousePosition;
@@ -119,6 +138,35 @@ public class PlayerController : MonoBehaviour
                 shotCounter = timeBetweenShots;
             }
         }
+
+        //按下按键触发无敌
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            //技能在冷却完成状态 & 技能不再施放中
+            if (dashCooldownCounter <= 0 && dashCounter <= 0)
+            {
+                activeMoveSpeed = dashSpeed;
+                dashCounter = dashDuration;
+            }
+        }
+
+        if (dashCounter > 0)
+        {
+            dashCounter -= Time.deltaTime;
+
+            if (dashCounter <= 0)
+            {
+                activeMoveSpeed = moveSpeed;
+                dashCooldownCounter = dashCooldown;
+            }
+        }
+
+        if (dashCooldownCounter > 0)
+        {
+            dashCooldownCounter -= Time.deltaTime;
+        }
+
+
 
 
 

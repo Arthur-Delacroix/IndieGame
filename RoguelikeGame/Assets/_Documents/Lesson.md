@@ -20,3 +20,8 @@ translation duration 两段动画融合过渡的时长
 OnBecameInvisible 当gameobject消失在屏幕内触发的事件
 
 Random.Range参数，min包含，max排除
+
+Layers之间的的忽略关系，在Edit -> Project Settings -> Physics2D -> Layer Collision Matrix 中进行设置
+
+UGUI中的文字outline和shadow，可以多次叠加，描边线是基于上一次次的轮廓继续描边，影子是基于上一次影子的外边缘添加影子
+利用此特性可以实现有立体感的文字等效果
