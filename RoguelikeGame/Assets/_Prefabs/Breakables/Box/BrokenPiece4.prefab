@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 453258996657788785}
   - component: {fileID: 1689689581165085740}
+  - component: {fileID: 6896382036683718590}
   m_Layer: 0
   m_Name: BrokenPiece4
   m_TagString: Untagged
@@ -82,3 +83,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6896382036683718590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5878643211903200294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1ba42738e608064fb808e6432e7f444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 3
+  deceleration: 5
+  lifeTime: 3
+  theSR: {fileID: 1689689581165085740}
+  fadeSpeed: 2.5

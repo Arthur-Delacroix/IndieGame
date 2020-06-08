@@ -122,3 +122,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf9305ef3bd01e14081552e9092de493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BrokenPieces:
+  - {fileID: 1527151739228512418, guid: 1e8625a424531954093f8337527906e9, type: 3}
+  - {fileID: 8164004282673407702, guid: b5632edecfa350540bd2093966a8976d, type: 3}
+  - {fileID: 8355900110405387220, guid: 43758c8e93933f347ad7e26c3762047f, type: 3}
+  - {fileID: 5878643211903200294, guid: 05fadd1604c74344b90d5bb3de9efd64, type: 3}
+  - {fileID: 4779056258100915764, guid: 5486247f89c7ffe42bebd611bb198cce, type: 3}
+  - {fileID: 8832568751105827172, guid: f408baa7ebca5fe4f84010f07d351958, type: 3}
+  maxPieces: 5
