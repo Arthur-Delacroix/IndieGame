@@ -26,20 +26,26 @@ public class PlayerHealthController : MonoBehaviour
 
     void Start()
     {
+        //初始化生命值
         currentHealth = maxHealth;
 
+        //设置生命值的 最大/当前 值
         UIController.ins.healthSlider.maxValue = maxHealth;
         UIController.ins.healthSlider.value = currentHealth;
 
+        //设置生命值显示文字
         UIController.ins.healthText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
     }
 
     void Update()
     {
+        //在无敌时间内触发以下代码
         if (invincCount > 0)
         {
+            //无敌时间减少
             invincCount -= Time.deltaTime;
 
+            //无敌时间结束后，将任务alpha值恢复正常
             if (invincCount <= 0)
             {
                 PlayerController.ins.bodySR.color = new Color(1, 1, 1, 1);
@@ -52,10 +58,13 @@ public class PlayerHealthController : MonoBehaviour
     public void DamagePlayer()
     {
         //受伤之前先判断是否处在无敌时间内
+
+        //不在无敌时间内触发以下代码
         if (invincCount <= 0)
         {
             currentHealth--;
 
+            //生命值为0时游戏结束
             if (currentHealth <= 0)
             {
                 PlayerController.ins.gameObject.SetActive(false);
@@ -63,9 +72,11 @@ public class PlayerHealthController : MonoBehaviour
                 UIController.ins.deathScreen.SetActive(true);
             }
 
+            //更新当前生命值显示 slider和文字
             UIController.ins.healthSlider.value = currentHealth;
             UIController.ins.healthText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
 
+            //激活无敌时间
             invincCount = damageInvincLength;
 
             //受伤后玩家身体变成半透明
@@ -79,5 +90,22 @@ public class PlayerHealthController : MonoBehaviour
         invincCount = _length;
 
         PlayerController.ins.bodySR.color = new Color(1, 1, 1, 0.5f);
+    }
+
+    //捡起医疗包时候触发这个方法
+    public void HealPlayer(int _healAmount)
+    {
+        //增加一定量的生命值
+        currentHealth += _healAmount;
+
+        //判断是否达到最大生命值
+        if (currentHealth >= maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+
+        //更新当前生命值显示 slider和文字
+        UIController.ins.healthSlider.value = currentHealth;
+        UIController.ins.healthText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
     }
 }

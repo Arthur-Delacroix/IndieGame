@@ -6,21 +6,24 @@ using UnityEngine;
 
 public class Breakable : MonoBehaviour
 {
+    //每个箱子包含的碎片prefab
     [SerializeField] private GameObject[] BrokenPieces;
 
     //一个箱子破碎时最多产生多少个碎片
     [SerializeField] private int maxPieces;
 
+    //箱子被击碎时是否会掉落道具
+    [SerializeField] private bool shouldDropItem;
 
-    void Start()
-    {
+    //箱子会掉落的道具prefab
+    [SerializeField] private GameObject[] itemToDrop;
 
-    }
+    //掉落物品的几率
+    [SerializeField] private float itemDropPercent;
 
-    void Update()
-    {
 
-    }
+
+
 
     //当人物冲刺时碰到箱子会触发
     private void OnTriggerEnter2D(Collider2D _other)
