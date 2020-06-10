@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7990124162317587596}
   - component: {fileID: 7990124162317587597}
   m_Layer: 0
-  m_Name: HealthPickup
+  m_Name: HealthPickup1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healAmount: 1
+  waitToBeCollected: 0.5
 --- !u!61 &7990124162317587597
 BoxCollider2D:
   m_ObjectHideFlags: 0

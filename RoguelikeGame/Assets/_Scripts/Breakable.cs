@@ -47,6 +47,23 @@ public class Breakable : MonoBehaviour
                     Instantiate(BrokenPieces[randomPiece], transform.position, transform.rotation);
                 }
 
+                //触发掉落物品
+                if (shouldDropItem)
+                {
+                    //首先随机产生一个0到100的数值
+                    float dropChance = Random.Range(0f, 100f);
+
+                    //判断该数值是否在掉落几率内
+                    if (dropChance < itemDropPercent)
+                    {
+                        //随机选择一个掉落物品
+                        int randomItem = Random.Range(0, itemToDrop.Length);
+
+                        //生成掉落物品
+                        Instantiate(itemToDrop[randomItem], transform.position, transform.rotation);
+                    }
+                }
+
             }
         }
     }
