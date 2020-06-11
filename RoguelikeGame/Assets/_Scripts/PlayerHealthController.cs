@@ -70,6 +70,8 @@ public class PlayerHealthController : MonoBehaviour
                 PlayerController.ins.gameObject.SetActive(false);
 
                 UIController.ins.deathScreen.SetActive(true);
+
+                AudioManager.ins.PlayGameOver();
             }
 
             //更新当前生命值显示 slider和文字
