@@ -21,7 +21,8 @@ public class Breakable : MonoBehaviour
     //掉落物品的几率
     [SerializeField] private float itemDropPercent;
 
-
+    //当箱子破碎时会播放的音效的索引
+    //[SerializeField] private int breakSound;
 
 
 
@@ -34,6 +35,8 @@ public class Breakable : MonoBehaviour
             if (PlayerController.ins.dashCounter > 0)
             {
                 Destroy(gameObject);
+
+                AudioManager.ins.playSFX(0);
 
                 //产生随机数量的碎片
                 int piecesToDrop = Random.Range(1, maxPieces);

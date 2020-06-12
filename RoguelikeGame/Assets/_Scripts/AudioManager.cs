@@ -13,6 +13,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource gameOverMusic;
     [SerializeField] private AudioSource winMusic;
 
+    //各类其他音效
+    [SerializeField] private AudioSource[] sfx;
+
     private void Awake()
     {
         ins = this;
@@ -28,5 +31,11 @@ public class AudioManager : MonoBehaviour
     {
         levelMusic.Stop();
         winMusic.Play();
+    }
+
+    public void playSFX(int sfxToPlay)
+    {
+        sfx[sfxToPlay].Stop();
+        sfx[sfxToPlay].Play();
     }
 }
