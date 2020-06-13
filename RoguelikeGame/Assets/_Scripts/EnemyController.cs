@@ -78,10 +78,13 @@ public class EnemyController : MonoBehaviour
             {
                 fireCounter -= Time.deltaTime;
 
+
                 if (fireCounter <= 0)
                 {
                     fireCounter = fireRate;
                     Instantiate(bullet, firePoint.position, firePoint.rotation);
+
+                    AudioManager.ins.playSFX(13);
                 }
             }
         }
@@ -109,12 +112,16 @@ public class EnemyController : MonoBehaviour
         //减去造成的伤害
         health -= _damage;
 
+        AudioManager.ins.playSFX(2);
+
         Instantiate(hitEffect, transform.position, transform.rotation);
 
         //死亡时触发的一系列代码
         if (health <= 0)
         {
             Destroy(gameObject);
+
+            AudioManager.ins.playSFX(1);
 
             //死亡后留下的痕迹，在多个效果中随机选择
             //Random.Range nim包含 max排除

@@ -64,6 +64,8 @@ public class PlayerHealthController : MonoBehaviour
         {
             currentHealth--;
 
+            AudioManager.ins.playSFX(11);
+
             //生命值为0时游戏结束
             if (currentHealth <= 0)
             {
@@ -72,6 +74,8 @@ public class PlayerHealthController : MonoBehaviour
                 UIController.ins.deathScreen.SetActive(true);
 
                 AudioManager.ins.PlayGameOver();
+
+                AudioManager.ins.playSFX(8);
             }
 
             //更新当前生命值显示 slider和文字

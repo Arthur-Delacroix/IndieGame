@@ -28,6 +28,8 @@ public class HealthPickup : MonoBehaviour
             PlayerHealthController.ins.HealPlayer(healAmount);
 
             Destroy(gameObject);
+
+            AudioManager.ins.playSFX(7);
         }
     }
 }

@@ -120,6 +120,8 @@ public class PlayerController : MonoBehaviour
             Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
 
             shotCounter = timeBetweenShots;
+
+            AudioManager.ins.playSFX(12);
         }
 
         //连续射击
@@ -134,6 +136,8 @@ public class PlayerController : MonoBehaviour
             if (shotCounter <= 0)
             {
                 Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
+
+                AudioManager.ins.playSFX(12);
 
                 shotCounter = timeBetweenShots;
             }
@@ -151,6 +155,8 @@ public class PlayerController : MonoBehaviour
                 anim.SetTrigger("dash");
 
                 PlayerHealthController.ins.MakeInvincible(dashInvincibility);
+
+                AudioManager.ins.playSFX(8);
             }
         }
 

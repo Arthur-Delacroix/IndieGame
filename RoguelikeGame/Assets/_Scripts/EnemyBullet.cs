@@ -33,6 +33,8 @@ public class EnemyBullet : MonoBehaviour
         }
 
         Destroy(gameObject);
+
+        AudioManager.ins.playSFX(4);
     }
 
     private void OnBecameInvisible()

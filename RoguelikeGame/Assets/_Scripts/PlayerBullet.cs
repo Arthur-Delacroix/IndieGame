@@ -18,11 +18,6 @@ public class PlayerBullet : MonoBehaviour
     //子弹的伤害值
     [SerializeField] private int damageToGive;
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         //为刚体设置初始速度的正方向
@@ -34,6 +29,8 @@ public class PlayerBullet : MonoBehaviour
         Instantiate(impactEffect, transform.position, transform.rotation);
 
         Destroy(gameObject);
+
+        AudioManager.ins.playSFX(4);
 
         //Debug.Log(other.gameObject.name);
 
