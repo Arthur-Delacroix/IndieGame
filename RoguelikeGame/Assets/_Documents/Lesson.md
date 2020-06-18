@@ -34,6 +34,8 @@ trigger是触发器，代码设置后为真，状态根据此条件处理过一�
 
 在绘制地图时，旋转Tilemap中的Tile元素，使用键盘上的"[" 和 "]" 按键
 
+composite Collider 2D 作用是将多个相邻，且带Tilemap collider 2D的物体的 collider合并，看作一个整体
+
 [TODO]
 人物dash时产生拖尾的粒子效果
 
