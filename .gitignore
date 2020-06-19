@@ -1,13 +1,13 @@
 # Folders
 Library
+Logs
 obj
-Packages
 .vs
 Temp
+UserSettings
  
 # Files
 *.csproj
 *.sln
 ~$*.doc
 *.tmp
-_New/~$论文初稿.docx
