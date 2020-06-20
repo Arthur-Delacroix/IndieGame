@@ -31,7 +31,5 @@ public class CameraController : MonoBehaviour
     public void ChangeTarget(Transform _newTarget)
     {
         target = _newTarget;
-
-        Debug.Log(_newTarget.transform.position);
     }
 }
