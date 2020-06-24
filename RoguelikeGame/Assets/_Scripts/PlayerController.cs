@@ -58,6 +58,8 @@ public class PlayerController : MonoBehaviour
     //人物的实际速度
     private float activeMoveSpeed;
 
+    public bool canMove = true;
+
     private void Awake()
     {
         ins = this;
@@ -70,123 +72,128 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        //将移动方向的X Y分别绑定到输入轴向上
-        moveInput.x = Input.GetAxisRaw("Horizontal");
-        moveInput.y = Input.GetAxisRaw("Vertical");
-
-        //将输入的值进行归一化，使其在各个方向的输入数值的绝对值始终相等（即为一个圆形）
-        //举例：如果是向正上方移动，输入为1，乘以速度系数2.5后，速度为2.5，正右方向移动输入为1，乘以速度系数2.5后，速度为2.5
-        //但是当向右斜上方移动时候，向量长度则为根号2，是大于1的，乘以速度系数之后，是2.5*根号2，所以人物在非竖直水平移动的时候，，速度会快
-        //归一化是位了让人物在各个方向的移动上速度都是相同的
-        moveInput.Normalize();
-
-        //注意，这里X Y乘以了Time.deltaTime，目的是：
-        //如果只是单纯的数值控制移动，在不同性能的设备上，由于帧数的差别，可能造成不同的效果
-        //这里乘以Time.deltaTime，为了达到在不同性能设备上，移动距离相等的效果
-        // gameObject.transform.position += new Vector3(moveInput.x * Time.deltaTime * moveSpeed, moveInput.y * Time.deltaTime * moveSpeed, 0f);
-
-        //为人物刚体增加位移
-        theRB.velocity = moveInput * activeMoveSpeed;
-
-        //将鼠标的位置转换到游戏屏幕内的坐标
-        Vector3 mousePos = Input.mousePosition;
-        Vector3 screenPoint = theCam.WorldToScreenPoint(transform.localPosition);
-
-        //判断鼠标是在人物的左面还是右面
-        //人物始终要看向鼠标所在的那一侧
-        if (mousePos.x < screenPoint.x)
+        if (canMove)
         {
-            //通过改变X的scale来控制人物的朝向，1为右侧，-1为左侧
-            transform.localScale = new Vector3(-1, 1, 1);
-            gunArm.localScale = new Vector3(-1, -1, 1);
-        }
-        else
-        {
-            transform.localScale = Vector3.one;
-            gunArm.localScale = Vector3.one;
-        }
+            //将移动方向的X Y分别绑定到输入轴向上
+            moveInput.x = Input.GetAxisRaw("Horizontal");
+            moveInput.y = Input.GetAxisRaw("Vertical");
+
+            //将输入的值进行归一化，使其在各个方向的输入数值的绝对值始终相等（即为一个圆形）
+            //举例：如果是向正上方移动，输入为1，乘以速度系数2.5后，速度为2.5，正右方向移动输入为1，乘以速度系数2.5后，速度为2.5
+            //但是当向右斜上方移动时候，向量长度则为根号2，是大于1的，乘以速度系数之后，是2.5*根号2，所以人物在非竖直水平移动的时候，，速度会快
+            //归一化是位了让人物在各个方向的移动上速度都是相同的
+            moveInput.Normalize();
+
+            //注意，这里X Y乘以了Time.deltaTime，目的是：
+            //如果只是单纯的数值控制移动，在不同性能的设备上，由于帧数的差别，可能造成不同的效果
+            //这里乘以Time.deltaTime，为了达到在不同性能设备上，移动距离相等的效果
+            // gameObject.transform.position += new Vector3(moveInput.x * Time.deltaTime * moveSpeed, moveInput.y * Time.deltaTime * moveSpeed, 0f);
+
+            //为人物刚体增加位移
+            theRB.velocity = moveInput * activeMoveSpeed;
+
+            //将鼠标的位置转换到游戏屏幕内的坐标
+            Vector3 mousePos = Input.mousePosition;
+            Vector3 screenPoint = theCam.WorldToScreenPoint(transform.localPosition);
+
+            //判断鼠标是在人物的左面还是右面
+            //人物始终要看向鼠标所在的那一侧
+            if (mousePos.x < screenPoint.x)
+            {
+                //通过改变X的scale来控制人物的朝向，1为右侧，-1为左侧
+                transform.localScale = new Vector3(-1, 1, 1);
+                gunArm.localScale = new Vector3(-1, -1, 1);
+            }
+            else
+            {
+                transform.localScale = Vector3.one;
+                gunArm.localScale = Vector3.one;
+            }
 
 
-        //这里用鼠标在屏幕中的位置 减去 人物在屏幕中的位置，求两者X Y的距离，其实是求出了一个向量
-        Vector2 offset = new Vector2(mousePos.x - screenPoint.x, mousePos.y - screenPoint.y);
-        //通过取正弦值，先得出弧度值，然后通过乘以角度系数，得出该向量的角度值
-        float angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
-        //旋转拿枪的Sprite
-        gunArm.rotation = Quaternion.Euler(0, 0, angle);
+            //这里用鼠标在屏幕中的位置 减去 人物在屏幕中的位置，求两者X Y的距离，其实是求出了一个向量
+            Vector2 offset = new Vector2(mousePos.x - screenPoint.x, mousePos.y - screenPoint.y);
+            //通过取正弦值，先得出弧度值，然后通过乘以角度系数，得出该向量的角度值
+            float angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
+            //旋转拿枪的Sprite
+            gunArm.rotation = Quaternion.Euler(0, 0, angle);
 
-        //人物开枪射击
-        if (Input.GetMouseButtonDown(0))
-        {
-            Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
-
-            shotCounter = timeBetweenShots;
-
-            AudioManager.ins.playSFX(12);
-        }
-
-        //连续射击
-        //当鼠标一直按下的时候，shotCounter开始随时间变小，当小于等于0的时候就会触发连续射击
-        //每次射出子弹后，重新初始化shotCounter的值
-        //这样保证了玩家一直按下鼠标时候不会立刻触发连续射击，然后每次连续射击的最大射速和连点的最大射速相同
-        //连续射击和连点射击的最大射速，都是timeBetweenShots控制
-        if (Input.GetMouseButton(0))
-        {
-            shotCounter -= Time.deltaTime;
-
-            if (shotCounter <= 0)
+            //人物开枪射击
+            if (Input.GetMouseButtonDown(0))
             {
                 Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
 
-                AudioManager.ins.playSFX(12);
-
                 shotCounter = timeBetweenShots;
-            }
-        }
 
-        //按下按键触发无敌
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //技能在冷却完成状态 & 技能不再施放中
-            if (dashCooldownCounter <= 0 && dashCounter <= 0)
+                AudioManager.ins.playSFX(12);
+            }
+
+            //连续射击
+            //当鼠标一直按下的时候，shotCounter开始随时间变小，当小于等于0的时候就会触发连续射击
+            //每次射出子弹后，重新初始化shotCounter的值
+            //这样保证了玩家一直按下鼠标时候不会立刻触发连续射击，然后每次连续射击的最大射速和连点的最大射速相同
+            //连续射击和连点射击的最大射速，都是timeBetweenShots控制
+            if (Input.GetMouseButton(0))
             {
-                activeMoveSpeed = dashSpeed;
-                dashCounter = dashDuration;
+                shotCounter -= Time.deltaTime;
 
-                anim.SetTrigger("dash");
+                if (shotCounter <= 0)
+                {
+                    Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
 
-                PlayerHealthController.ins.MakeInvincible(dashInvincibility);
+                    AudioManager.ins.playSFX(12);
 
-                AudioManager.ins.playSFX(8);
+                    shotCounter = timeBetweenShots;
+                }
             }
-        }
 
-        if (dashCounter > 0)
-        {
-            dashCounter -= Time.deltaTime;
-
-            if (dashCounter <= 0)
+            //按下按键触发无敌
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                activeMoveSpeed = moveSpeed;
-                dashCooldownCounter = dashCooldown;
+                //技能在冷却完成状态 & 技能不再施放中
+                if (dashCooldownCounter <= 0 && dashCounter <= 0)
+                {
+                    activeMoveSpeed = dashSpeed;
+                    dashCounter = dashDuration;
+
+                    anim.SetTrigger("dash");
+
+                    PlayerHealthController.ins.MakeInvincible(dashInvincibility);
+
+                    AudioManager.ins.playSFX(8);
+                }
             }
+
+            if (dashCounter > 0)
+            {
+                dashCounter -= Time.deltaTime;
+
+                if (dashCounter <= 0)
+                {
+                    activeMoveSpeed = moveSpeed;
+                    dashCooldownCounter = dashCooldown;
+                }
+            }
+
+            if (dashCooldownCounter > 0)
+            {
+                dashCooldownCounter -= Time.deltaTime;
+            }
+
+            //判断人物是否在移动，并播放相应的动画
+            if (moveInput != Vector2.zero)
+            {
+                anim.SetBool("isMoving", true);
+            }
+            else
+            {
+                anim.SetBool("isMoving", false);
+            }
+
         }
-
-        if (dashCooldownCounter > 0)
+        else//当玩家不能移动时触发
         {
-            dashCooldownCounter -= Time.deltaTime;
-        }
-
-
-
-
-
-        //判断人物是否在移动，并播放相应的动画
-        if (moveInput != Vector2.zero)
-        {
-            anim.SetBool("isMoving", true);
-        }
-        else
-        {
+            theRB.velocity = Vector2.zero;
             anim.SetBool("isMoving", false);
         }
     }

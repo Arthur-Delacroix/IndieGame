@@ -24,6 +24,8 @@ public class LevelManager : MonoBehaviour
     {
         AudioManager.ins.PlayLevelWin();
 
+        PlayerController.ins.canMove = false;
+
         yield return new WaitForSeconds(waitToLoad);
 
         SceneManager.LoadScene(nextLevel);
