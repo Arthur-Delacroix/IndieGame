@@ -1199,7 +1199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitToLoad: 4
-  nextLevel: TestScene
+  nextLevel: Victory
 --- !u!1 &727587886
 GameObject:
   m_ObjectHideFlags: 0
