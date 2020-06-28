@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 #pragma warning disable 649
 
@@ -23,11 +24,10 @@ public class UIController : MonoBehaviour
     //淡入淡出速度
     [SerializeField] private float fadeSpeed;
 
-
+    //
     [SerializeField] private bool fadeToBlack;
-
+    //
     [SerializeField] private bool fadeOutBlack;
-
 
     private void Awake()
     {
@@ -51,6 +51,7 @@ public class UIController : MonoBehaviour
             if (fadeScreen.color.a == 0f)
             {
                 fadeOutBlack = false;
+                //fadeScreen.gameObject.SetActive(false);
             }
         }
 
@@ -71,5 +72,10 @@ public class UIController : MonoBehaviour
     {
         fadeOutBlack = false;
         fadeToBlack = true;
+    }
+
+    public void LaodScene(string _sceneName)
+    {
+        SceneManager.LoadScene(_sceneName);
     }
 }
