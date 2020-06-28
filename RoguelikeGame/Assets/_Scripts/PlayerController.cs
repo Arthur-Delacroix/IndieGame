@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (canMove)
+        if (canMove&&!LevelManager.ins.isPaused)
         {
             //将移动方向的X Y分别绑定到输入轴向上
             moveInput.x = Input.GetAxisRaw("Horizontal");

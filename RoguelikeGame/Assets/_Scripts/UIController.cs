@@ -29,6 +29,10 @@ public class UIController : MonoBehaviour
     //
     [SerializeField] private bool fadeOutBlack;
 
+    //[SerializeField] private GameObject pauseMenu;
+
+    public GameObject pauseMenu;
+
     private void Awake()
     {
         ins = this;
@@ -76,6 +80,15 @@ public class UIController : MonoBehaviour
 
     public void LaodScene(string _sceneName)
     {
+        Time.timeScale = 1f;
+
         SceneManager.LoadScene(_sceneName);
+    }
+
+    public void ResumeGame()
+    {
+        //pauseMenu.SetActive(false);
+
+        LevelManager.ins.PauseUnpause();
     }
 }

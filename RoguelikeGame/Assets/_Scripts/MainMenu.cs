@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+#pragma warning disable 649
+
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private string levelToLoad;

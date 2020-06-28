@@ -13,6 +13,11 @@ public class VictoryScreen : MonoBehaviour
 
     [SerializeField] private string mainMenuScene;
 
+    private void Start()
+    {
+        Time.timeScale = 1f;
+    }
+
     private void Update()
     {
         if (waitForAnyKey > 0)
