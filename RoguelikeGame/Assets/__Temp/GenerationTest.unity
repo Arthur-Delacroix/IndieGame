@@ -286,3 +286,6 @@ MonoBehaviour:
   startColor: {r: 0, g: 1, b: 0, a: 1}
   endColor: {r: 1, g: 0, b: 0, a: 1}
   generatorPoint: {fileID: 705619906}
+  selectedDirection: 0
+  xOffset: 18
+  yOffset: 10
