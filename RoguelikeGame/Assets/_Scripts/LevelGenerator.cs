@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 #pragma warning disable 649
 
@@ -39,6 +40,15 @@ public class LevelGenerator : MonoBehaviour
         //为下一个房间随机一个方位
         selectedDirection = (Direction)Random.Range(0, 4);
         MoveGenerationPoint();
+
+        //循环生成规定数量的房间
+        for (int i = 0; i < distanceToEnd; i++)
+        {
+            Instantiate(layoutRoom, generatorPoint.position, generatorPoint.rotation);
+
+            selectedDirection = (Direction)Random.Range(0, 4);
+            MoveGenerationPoint();
+        }
     }
 
     //按偏移量移动房间的生成器的位置
