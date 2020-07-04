@@ -33,6 +33,9 @@ public class LevelGenerator : MonoBehaviour
     //房间中心点纵向之间的距离
     [SerializeField] private float yOffset;
 
+    //生成的房间所在的layer，用来在OverlapCircle中进行过滤
+    [SerializeField] private LayerMask whatIsRoom;
+
     private void Start()
     {
         Instantiate(layoutRoom, generatorPoint.position, generatorPoint.rotation).GetComponent<SpriteRenderer>().color = startColor;
@@ -48,6 +51,14 @@ public class LevelGenerator : MonoBehaviour
 
             selectedDirection = (Direction)Random.Range(0, 4);
             MoveGenerationPoint();
+
+            //检测新生成的房间是否与已有的房间重叠
+            while (Physics2D.OverlapCircle(generatorPoint.position, 0.2f, whatIsRoom))
+            {
+                MoveGenerationPoint();
+
+                Debug.Log("dadadsa");
+            }
         }
     }
 

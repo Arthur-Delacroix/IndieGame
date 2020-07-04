@@ -289,3 +289,6 @@ MonoBehaviour:
   selectedDirection: 0
   xOffset: 18
   yOffset: 10
+  whatIsRoom:
+    serializedVersion: 2
+    m_Bits: 32768
