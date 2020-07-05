@@ -36,6 +36,12 @@ public class LevelGenerator : MonoBehaviour
     //生成的房间所在的layer，用来在OverlapCircle中进行过滤
     [SerializeField] private LayerMask whatIsRoom;
 
+    //存储当前关卡的最后一个房间
+    [SerializeField] private GameObject endRoom;
+
+    //存储所有房间的链表
+    [SerializeField] private List<GameObject> layoutRoomObjects = new List<GameObject>();
+
     private void Start()
     {
         Instantiate(layoutRoom, generatorPoint.position, generatorPoint.rotation).GetComponent<SpriteRenderer>().color = startColor;
@@ -47,7 +53,20 @@ public class LevelGenerator : MonoBehaviour
         //循环生成规定数量的房间
         for (int i = 0; i < distanceToEnd; i++)
         {
-            Instantiate(layoutRoom, generatorPoint.position, generatorPoint.rotation);
+            GameObject _newRoom = Instantiate(layoutRoom, generatorPoint.position, generatorPoint.rotation);
+
+            layoutRoomObjects.Add(_newRoom);
+
+            //判断当前生成的房间是不是最后一个，如果是的话，对该房间上色
+            if (i + 1 == distanceToEnd)
+            {
+                _newRoom.GetComponent<SpriteRenderer>().color = endColor;
+
+                //不将最后一个房间加入链表
+                layoutRoomObjects.RemoveAt(layoutRoomObjects.Count - 1);
+
+                endRoom = _newRoom;
+            }
 
             selectedDirection = (Direction)Random.Range(0, 4);
             MoveGenerationPoint();
@@ -56,9 +75,10 @@ public class LevelGenerator : MonoBehaviour
             while (Physics2D.OverlapCircle(generatorPoint.position, 0.2f, whatIsRoom))
             {
                 MoveGenerationPoint();
-
-                Debug.Log("dadadsa");
             }
+
+
+
         }
     }
 
