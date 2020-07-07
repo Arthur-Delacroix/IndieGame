@@ -42,6 +42,8 @@ public class LevelGenerator : MonoBehaviour
     //存储所有房间的链表
     [SerializeField] private List<GameObject> layoutRoomObjects = new List<GameObject>();
 
+    [SerializeField] private RoomPrefabs rooms;
+
     private void Start()
     {
         Instantiate(layoutRoom, generatorPoint.position, generatorPoint.rotation).GetComponent<SpriteRenderer>().color = startColor;
@@ -76,9 +78,6 @@ public class LevelGenerator : MonoBehaviour
             {
                 MoveGenerationPoint();
             }
-
-
-
         }
     }
 
@@ -101,5 +100,15 @@ public class LevelGenerator : MonoBehaviour
                 break;
         }
     }
+}
 
+//各种门朝向的房间
+[System.Serializable]
+public class RoomPrefabs
+{
+    public GameObject
+        singleUp, singleDown, singleLeft, singleRight,
+        doubleUpDown, doubleLeftRight, doubleUpRight, doubleRightDown, doubleDownLeft, doubleLeftUp,
+        tripleUpRightDown, tripleRightDownLeft, tripleDownLeftUp, tripleLeftUpRight,
+        fourway;
 }
