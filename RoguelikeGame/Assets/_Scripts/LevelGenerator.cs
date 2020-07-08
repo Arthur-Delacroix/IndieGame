@@ -42,7 +42,11 @@ public class LevelGenerator : MonoBehaviour
     //存储所有房间的链表
     [SerializeField] private List<GameObject> layoutRoomObjects = new List<GameObject>();
 
+    //所有类型房间的prefab
     [SerializeField] private RoomPrefabs rooms;
+
+    //记录已经生成的房间外框
+    [SerializeField] private List<GameObject> generatedOutlines = new List<GameObject>();
 
     private void Start()
     {
@@ -79,6 +83,18 @@ public class LevelGenerator : MonoBehaviour
                 MoveGenerationPoint();
             }
         }
+
+        //创建初始房间的开口方向
+        CreateRoomOutline(Vector3.zero);
+
+        //创建除第一和最后一个房间以外，所有房间的开口方向
+        foreach (GameObject _room in layoutRoomObjects)
+        {
+            CreateRoomOutline(_room.transform.position);
+        }
+
+        //创建最后一个房间的开口方向
+        CreateRoomOutline(endRoom.transform.position);
     }
 
     //按偏移量移动房间的生成器的位置
@@ -97,6 +113,123 @@ public class LevelGenerator : MonoBehaviour
                 break;
             case Direction.left:
                 generatorPoint.position += new Vector3(xOffset * -1f, 0f, 0f);
+                break;
+        }
+    }
+
+    public void CreateRoomOutline(Vector3 _roomPosition)
+    {
+        //上方是否有房间
+        bool _roomUp = Physics2D.OverlapCircle(_roomPosition + new Vector3(0f, yOffset, 0f), 0.2f, whatIsRoom);
+
+        //下方是否有房间
+        bool _roomDown = Physics2D.OverlapCircle(_roomPosition + new Vector3(0f, yOffset * -1f, 0f), 0.2f, whatIsRoom);
+
+        //左边是否有房间
+        bool _roomLeft = Physics2D.OverlapCircle(_roomPosition + new Vector3(xOffset * -1f, 0f, 0f), 0.2f, whatIsRoom);
+
+        //右边是否有房间
+        bool _roomRight = Physics2D.OverlapCircle(_roomPosition + new Vector3(xOffset, 0f, 0f), 0.2f, whatIsRoom);
+
+        //房间的开口数量
+        int _directionCount = 0;
+
+        //如果一个方向上为true，则证明该方向上有开口，开口数量就+1
+        //先确定开口数量，再看开口位置
+        if (_roomUp)
+        {
+            _directionCount++;
+        }
+        if (_roomDown)
+        {
+            _directionCount++;
+        }
+        if (_roomLeft)
+        {
+            _directionCount++;
+        }
+        if (_roomRight)
+        {
+            _directionCount++;
+        }
+
+        //分别判断每个房间有几个开口，开口方向
+        switch (_directionCount)
+        {
+            case 0:
+                Debug.LogError("no room exists!");
+                break;
+
+            case 1:
+                if (_roomUp)
+                {
+                    generatedOutlines.Add(Instantiate(rooms.singleUp, _roomPosition, transform.rotation));
+                }
+                if (_roomDown)
+                {
+                    generatedOutlines.Add(Instantiate(rooms.singleDown, _roomPosition, transform.rotation));
+                }
+                if (_roomLeft)
+                {
+                    generatedOutlines.Add(Instantiate(rooms.singleLeft, _roomPosition, transform.rotation));
+                }
+                if (_roomRight)
+                {
+                    generatedOutlines.Add(Instantiate(rooms.singleRight, _roomPosition, transform.rotation));
+                }
+                break;
+
+            case 2:
+                if (_roomUp && _roomDown)
+                {
+                    generatedOutlines.Add(Instantiate(rooms.doubleUpDown, _roomPosition, transform.rotation));
+                }
+                if (_roomLeft && _roomRight)
+                {
+                    generatedOutlines.Add(Instantiate(rooms.doubleLeftRight, _roomPosition, transform.rotation));
+                }
+                if (_roomUp && _roomRight)
+                {
+                    generatedOutlines.Add(Instantiate(rooms.doubleUpRight, _roomPosition, transform.rotation));
+                }
+                if (_roomRight && _roomDown)
+                {
+                    generatedOutlines.Add(Instantiate(rooms.doubleRightDown, _roomPosition, transform.rotation));
+                }
+                if (_roomDown && _roomLeft)
+                {
+                    generatedOutlines.Add(Instantiate(rooms.doubleDownLeft, _roomPosition, transform.rotation));
+                }
+                if (_roomLeft && _roomUp)
+                {
+                    generatedOutlines.Add(Instantiate(rooms.doubleLeftUp, _roomPosition, transform.rotation));
+                }
+                break;
+
+            case 3:
+                if (_roomUp && _roomRight && _roomDown)
+                {
+                    generatedOutlines.Add(Instantiate(rooms.tripleUpRightDown, _roomPosition, transform.rotation));
+                }
+                if (_roomRight && _roomDown && _roomLeft)
+                {
+                    generatedOutlines.Add(Instantiate(rooms.tripleRightDownLeft, _roomPosition, transform.rotation));
+                }
+                if (_roomDown && _roomLeft && _roomUp)
+                {
+                    generatedOutlines.Add(Instantiate(rooms.tripleDownLeftUp, _roomPosition, transform.rotation));
+                }
+                if (_roomLeft && _roomUp && _roomRight)
+                {
+                    generatedOutlines.Add(Instantiate(rooms.tripleLeftUpRight, _roomPosition, transform.rotation));
+                }
+                break;
+
+            case 4:
+                if (_roomLeft && _roomUp && _roomRight && _roomDown)
+                {
+                    generatedOutlines.Add(Instantiate(rooms.fourway, _roomPosition, transform.rotation));
+                }
                 break;
         }
     }
