@@ -10,42 +10,49 @@ public class Room : MonoBehaviour
     [SerializeField] private bool closeWhenEntered;
 
     //当房间内的人被全部消灭时，门会打开
-    [SerializeField] private bool openWhenEnemiesCleared;
+    //[SerializeField] private bool openWhenEnemiesCleared;
 
     //当前房间内所有的门的实例
     [SerializeField] private GameObject[] doors;
 
     //房间内所有的敌人
-    [SerializeField] private List<GameObject> enemies = new List<GameObject>();
+    //[SerializeField] private List<GameObject> enemies = new List<GameObject>();
 
     //是否为玩家当前进入的房间
-    private bool roomActive;
+    public bool roomActive;
 
     private void Update()
     {
         //检测房间内是不是所有的敌人都被消灭了
-        if (enemies.Count > 0 && roomActive && openWhenEnemiesCleared)
+        //if (enemies.Count > 0 && roomActive && openWhenEnemiesCleared)
+        //{
+        //    //isEnemiesCleared = false;
+        //    for (int i = 0; i < enemies.Count; i++)
+        //    {
+        //        if (enemies[i] == null)
+        //        {
+        //            enemies.RemoveAt(i);
+        //            i--;
+        //        }
+        //    }
+            //if (enemies.Count == 0)
+            //{
+            //    foreach (GameObject door in doors)
+            //    {
+            //        door.SetActive(false);
+            //        closeWhenEntered = false;
+            //    }
+            //}
+        //}
+    }
+
+    public void OpenDoors()
+    {
+        foreach (GameObject door in doors)
         {
-            //isEnemiesCleared = false;
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                if (enemies[i] == null)
-                {
-                    enemies.RemoveAt(i);
-                    i--;
-                }
+            door.SetActive(false);
 
-            }
-
-            if (enemies.Count == 0)
-            {
-                foreach (GameObject door in doors)
-                {
-                    door.SetActive(false );
-
-                    closeWhenEntered = false;
-                }
-            }
+            closeWhenEntered = false;
         }
     }
 
