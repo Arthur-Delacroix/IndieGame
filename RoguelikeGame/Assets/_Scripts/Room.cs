@@ -4,10 +4,11 @@ using UnityEngine;
 
 #pragma warning disable 649
 
+//此脚本为房间外框，后期要改名字
 public class Room : MonoBehaviour
 {
     //当玩家进入房间后，门关闭
-    [SerializeField] private bool closeWhenEntered;
+    public bool closeWhenEntered;
 
     //当房间内的人被全部消灭时，门会打开
     //[SerializeField] private bool openWhenEnemiesCleared;
@@ -35,14 +36,14 @@ public class Room : MonoBehaviour
         //            i--;
         //        }
         //    }
-            //if (enemies.Count == 0)
-            //{
-            //    foreach (GameObject door in doors)
-            //    {
-            //        door.SetActive(false);
-            //        closeWhenEntered = false;
-            //    }
-            //}
+        //if (enemies.Count == 0)
+        //{
+        //    foreach (GameObject door in doors)
+        //    {
+        //        door.SetActive(false);
+        //        closeWhenEntered = false;
+        //    }
+        //}
         //}
     }
 

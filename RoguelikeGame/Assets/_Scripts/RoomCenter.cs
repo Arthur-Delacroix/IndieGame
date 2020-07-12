@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+#pragma warning disable 649
+
 public class RoomCenter : MonoBehaviour
 {
     //当房间内的人被全部消灭时，门会打开
@@ -10,7 +12,15 @@ public class RoomCenter : MonoBehaviour
     //房间内所有的敌人
     [SerializeField] private List<GameObject> enemies = new List<GameObject>();
 
-    [SerializeField] private Room theRoom;
+    public Room theRoom;
+
+    private void Start()
+    {
+        if (openWhenEnemiesCleared)
+        {
+            theRoom.closeWhenEntered = true;
+        }
+    }
 
     private void Update()
     {

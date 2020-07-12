@@ -48,6 +48,13 @@ public class LevelGenerator : MonoBehaviour
     //记录已经生成的房间外框
     [SerializeField] private List<GameObject> generatedOutlines = new List<GameObject>();
 
+    //起始房间的Prefab
+    [SerializeField] private RoomCenter centerStart;
+    //结束的房间
+    [SerializeField] private RoomCenter centerEnd;
+    //各种不同样式的中间房间
+    [SerializeField] private RoomCenter[] potentialCenters;
+
     private void Start()
     {
         Instantiate(layoutRoom, generatorPoint.position, generatorPoint.rotation).GetComponent<SpriteRenderer>().color = startColor;
@@ -95,6 +102,32 @@ public class LevelGenerator : MonoBehaviour
 
         //创建最后一个房间的开口方向
         CreateRoomOutline(endRoom.transform.position);
+
+        //生成房间的内容
+        foreach (GameObject _outline in generatedOutlines)
+        {
+            if (generatedOutlines.IndexOf(_outline) == 0)
+            {
+                RoomCenter _tmp1 = Instantiate(centerStart, _outline.transform.position, _outline.transform.rotation);
+                _tmp1.theRoom = _outline.GetComponent<Room>();
+            }
+            else if (generatedOutlines.IndexOf(_outline) == generatedOutlines.Count - 1)
+            {
+                RoomCenter _tmp2 = Instantiate(centerEnd, _outline.transform.position, _outline.transform.rotation);
+                _tmp2.theRoom = _outline.GetComponent<Room>();
+            }
+            else
+            {
+                //从数组中随机算则一个房间内容
+                int _centerSelect = Random.Range(0, potentialCenters.Length);
+
+                //实例化该房间内容
+                RoomCenter _tmp = Instantiate(potentialCenters[_centerSelect], _outline.transform.position, _outline.transform.rotation);
+
+                //将房间内容与房间外框连接起来
+                _tmp.theRoom = _outline.GetComponent<Room>();
+            }
+        }
     }
 
     //按偏移量移动房间的生成器的位置
