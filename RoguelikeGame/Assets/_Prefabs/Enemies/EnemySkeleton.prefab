@@ -326,6 +326,6 @@ MonoBehaviour:
   shouldShoot: 1
   bullet: {fileID: 8084711686384160154, guid: 0a6a4e29689f6ca48b573b78d1cdf063, type: 3}
   firePoint: {fileID: 1387898344658187982}
-  fireRate: 0.4
+  fireRate: 0.5
   theBody: {fileID: 1387898343268190861}
-  shotRange: 0
+  shotRange: 7

@@ -57,7 +57,11 @@ public class LevelGenerator : MonoBehaviour
 
     private void Start()
     {
-        Instantiate(layoutRoom, generatorPoint.position, generatorPoint.rotation).GetComponent<SpriteRenderer>().color = startColor;
+        GameObject _startTmp;
+
+        _startTmp = Instantiate(layoutRoom, generatorPoint.position, generatorPoint.rotation);
+        _startTmp.GetComponent<SpriteRenderer>().color = startColor;
+
 
         //为下一个房间随机一个方位
         selectedDirection = (Direction)Random.Range(0, 4);
@@ -128,6 +132,17 @@ public class LevelGenerator : MonoBehaviour
                 _tmp.theRoom = _outline.GetComponent<Room>();
             }
         }
+
+        //销毁所有辅助定位用的layout
+        foreach (GameObject _layout in layoutRoomObjects)
+        {
+            Destroy(_layout);
+        }
+        layoutRoomObjects.Clear();
+        Destroy(_startTmp);
+        Destroy(endRoom);
+
+
     }
 
     //按偏移量移动房间的生成器的位置
