@@ -12,11 +12,24 @@ public class EnemyController : MonoBehaviour
     //敌人的移动速度系数
     [SerializeField] private float moveSpeed;
 
+    [SerializeField] private bool shouldChasePlayer;
     //敌人发现玩家的半径
-    [SerializeField] private float rangeToChaseplayer;
+    [SerializeField] private float rangeToChasePlayer;
 
     //敌人的移动方向
     private Vector3 moveDirection;
+
+    //Coward人物控制
+    [SerializeField] private bool shouldRunaway;
+    [SerializeField] private float runawayRange;
+
+    //Blob
+    [SerializeField] private bool shouldWander;
+    [SerializeField] private float wanderLength;
+    [SerializeField] private float pauselength;
+    [SerializeField] private float wanderCounter;
+    [SerializeField] private float pauseCounter;
+    [SerializeField] private Vector3 wanderDirection;
 
     [SerializeField] private Animator anim;
 
@@ -50,21 +63,74 @@ public class EnemyController : MonoBehaviour
     //敌人的射击范围，玩家进入该范围内才会进行射击
     [SerializeField] private float shotRange;
 
+    private void Start()
+    {
+        if (shouldWander)
+        {
+            wanderDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
+        }
+    }
+
     private void Update()
     {
         //判断敌人是否出现在了屏幕中，出现在屏幕中才会执行相应的动作
         //判断玩家是否消失，玩家未消失才会执行
         if (theBody.isVisible && PlayerController.ins.gameObject.activeInHierarchy)
         {
-            if (Vector3.Distance(transform.position, PlayerController.ins.transform.position) < rangeToChaseplayer)
+            moveDirection = Vector3.zero;
+
+            if (Vector3.Distance(transform.position, PlayerController.ins.transform.position) < rangeToChasePlayer && shouldChasePlayer)
             {
                 //根据玩家和敌人之间的距离，计算出一个方向向量，这个向量就是敌人的移动方向
                 moveDirection = PlayerController.ins.transform.position - transform.position;
             }
             else
             {
-                moveDirection = Vector3.zero;
+                //wander
+                if (shouldWander)
+                {
+                    if (wanderCounter > 0)
+                    {
+                        wanderCounter -= Time.deltaTime;
+
+                        //move the enemy
+                        moveDirection = wanderDirection;
+
+                        if (wanderCounter <= 0)
+                        {
+                            pauseCounter = Random.Range(pauselength * 0.5f, wanderLength * 1.5f);
+                        }
+                    }
+
+                    if (pauseCounter > 0)
+                    {
+                        pauseCounter -= Time.deltaTime;
+
+                        if (pauseCounter <= 0)
+                        {
+                            wanderCounter = pauseCounter = Random.Range(wanderLength * 0.5f, wanderLength * 1.5f);
+
+                            wanderDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
+                        }
+                    }
+                }
+                //wander end
             }
+
+            //Coward 玩家离敌人太远，敌人会逃走
+            if (shouldRunaway && Vector3.Distance(transform.position, PlayerController.ins.transform.position) < runawayRange)
+            {
+                moveDirection = -(PlayerController.ins.transform.position - transform.position);
+            }
+
+            if (shouldWander)
+            {
+
+            }
+            //else
+            //{
+            //    moveDirection = Vector3.zero;
+            //}
 
             //将得到的方向归一化，便于乘以速度
             moveDirection.Normalize();

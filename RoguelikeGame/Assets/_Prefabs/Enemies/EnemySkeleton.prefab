@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1387898343268190860}
   - component: {fileID: 1387898343268190861}
   m_Layer: 10
-  m_Name: EnemySprite
+  m_Name: Enemies_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,6 +209,7 @@ GameObject:
   - component: {fileID: 1387898344761675804}
   - component: {fileID: 1387898344761675806}
   - component: {fileID: 1387898344761675805}
+  - component: {fileID: 1831910675}
   m_Layer: 10
   m_Name: EnemySkeleton
   m_TagString: Enemy
@@ -313,7 +314,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   theRB: {fileID: 1387898344761675804}
   moveSpeed: 1.5
-  rangeToChaseplayer: 7
+  shouldChasePlayer: 1
+  rangeToChasePlayer: 10
+  shouldRunaway: 0
+  runawayRange: 5
   anim: {fileID: 1387898344761675806}
   health: 150
   deathSplatters:
@@ -323,9 +327,21 @@ MonoBehaviour:
   - {fileID: 736357771210276407, guid: 8f85a5fff94b61f49adcb12c45b98ad5, type: 3}
   hitEffect: {fileID: 6943144893830698129, guid: 5bb3e43fa38c13b4097e6083d7b464bb,
     type: 3}
-  shouldShoot: 1
+  shouldShoot: 0
   bullet: {fileID: 8084711686384160154, guid: 0a6a4e29689f6ca48b573b78d1cdf063, type: 3}
   firePoint: {fileID: 1387898344658187982}
   fireRate: 0.5
   theBody: {fileID: 1387898343268190861}
-  shotRange: 7
+  shotRange: 5
+--- !u!114 &1831910675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387898344761675809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aded5bb7912b25f4f9af6ab0e47351a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
