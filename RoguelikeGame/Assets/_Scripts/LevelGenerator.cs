@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 #pragma warning disable 649
 
@@ -208,6 +207,7 @@ public class LevelGenerator : MonoBehaviour
                 Debug.LogError("no room exists!");
                 break;
 
+                //只有一个开口
             case 1:
                 if (_roomUp)
                 {
@@ -227,6 +227,7 @@ public class LevelGenerator : MonoBehaviour
                 }
                 break;
 
+                //2个开口
             case 2:
                 if (_roomUp && _roomDown)
                 {
@@ -254,6 +255,7 @@ public class LevelGenerator : MonoBehaviour
                 }
                 break;
 
+                //3个开口
             case 3:
                 if (_roomUp && _roomRight && _roomDown)
                 {
@@ -273,6 +275,7 @@ public class LevelGenerator : MonoBehaviour
                 }
                 break;
 
+                //4个开口
             case 4:
                 if (_roomLeft && _roomUp && _roomRight && _roomDown)
                 {
@@ -284,6 +287,7 @@ public class LevelGenerator : MonoBehaviour
 }
 
 //各种门朝向的房间
+//这个类可以移动到scriptableobject中
 [System.Serializable]
 public class RoomPrefabs
 {

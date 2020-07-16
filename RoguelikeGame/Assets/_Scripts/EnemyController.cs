@@ -98,7 +98,7 @@ public class EnemyController : MonoBehaviour
 
                         if (wanderCounter <= 0)
                         {
-                            pauseCounter = Random.Range(pauselength * 0.5f, wanderLength * 1.5f);
+                            pauseCounter = Random.Range(pauselength * 0.5f, pauselength * 1.5f);
                         }
                     }
 
@@ -108,7 +108,7 @@ public class EnemyController : MonoBehaviour
 
                         if (pauseCounter <= 0)
                         {
-                            wanderCounter = pauseCounter = Random.Range(wanderLength * 0.5f, wanderLength * 1.5f);
+                            wanderCounter = wanderCounter = Random.Range(wanderLength * 0.5f, wanderLength * 1.5f);
 
                             wanderDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
                         }
@@ -123,10 +123,6 @@ public class EnemyController : MonoBehaviour
                 moveDirection = -(PlayerController.ins.transform.position - transform.position);
             }
 
-            if (shouldWander)
-            {
-
-            }
             //else
             //{
             //    moveDirection = Vector3.zero;

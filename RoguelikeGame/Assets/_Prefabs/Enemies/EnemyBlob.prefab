@@ -152,10 +152,10 @@ MonoBehaviour:
   rangeToChasePlayer: 10
   shouldRunaway: 0
   runawayRange: 5
-  shouldWander: 0
-  wanderLength: 0
-  pauselength: 0
-  wanderCounter: 0
+  shouldWander: 1
+  wanderLength: 2
+  pauselength: 1
+  wanderCounter: 2
   pauseCounter: 0
   wanderDirection: {x: 0, y: 0, z: 0}
   anim: {fileID: 2596759902564227815}
