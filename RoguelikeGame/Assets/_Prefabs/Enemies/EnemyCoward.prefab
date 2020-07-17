@@ -58,7 +58,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4805703206073618146}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.13, y: 2.13, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4805703206728143951}
@@ -151,6 +151,12 @@ MonoBehaviour:
   rangeToChasePlayer: 7
   shouldRunaway: 1
   runawayRange: 5
+  shouldWander: 0
+  wanderLength: 0
+  pauselength: 0
+  wanderCounter: 0
+  pauseCounter: 0
+  wanderDirection: {x: 0, y: 0, z: 0}
   anim: {fileID: 4805703206073618141}
   health: 150
   deathSplatters:

@@ -20,6 +20,7 @@ public class EnemyController : MonoBehaviour
     private Vector3 moveDirection;
 
     //Coward人物控制
+    [Header("Runaway")]
     [SerializeField] private bool shouldRunaway;
     [SerializeField] private float runawayRange;
 
@@ -30,6 +31,11 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float wanderCounter;
     [SerializeField] private float pauseCounter;
     [SerializeField] private Vector3 wanderDirection;
+
+    //enemy fire
+    [SerializeField] private bool shouldPatrol;
+    [SerializeField] private Transform[] patrolPoints;//路径点
+    [SerializeField] private int currentPatrolPoint;
 
     [SerializeField] private Animator anim;
 
@@ -115,6 +121,26 @@ public class EnemyController : MonoBehaviour
                     }
                 }
                 //wander end
+
+                //shouldPatrol
+                if (shouldPatrol)
+                {
+                    moveDirection = patrolPoints[currentPatrolPoint].position - transform.position;
+
+                    if (Vector3.Distance(transform.position, patrolPoints[currentPatrolPoint].position)<0.2f)
+                    {
+                        currentPatrolPoint++;
+
+                        if (currentPatrolPoint>=patrolPoints.Length)
+                        {
+                            currentPatrolPoint = 0;
+                        }
+                          
+                              
+                    }
+                }
+
+                //shouldPatrol end
             }
 
             //Coward 玩家离敌人太远，敌人会逃走
