@@ -127,19 +127,18 @@ public class EnemyController : MonoBehaviour
                 {
                     moveDirection = patrolPoints[currentPatrolPoint].position - transform.position;
 
-                    if (Vector3.Distance(transform.position, patrolPoints[currentPatrolPoint].position)<0.2f)
+                    if (Vector3.Distance(transform.position, patrolPoints[currentPatrolPoint].position) < 0.2f)
                     {
                         currentPatrolPoint++;
 
-                        if (currentPatrolPoint>=patrolPoints.Length)
+                        if (currentPatrolPoint >= patrolPoints.Length)
                         {
                             currentPatrolPoint = 0;
                         }
-                          
-                              
+
+
                     }
                 }
-
                 //shouldPatrol end
             }
 
@@ -181,7 +180,6 @@ public class EnemyController : MonoBehaviour
             //当玩家消失后，自身的刚体运动速度为0
             theRB.velocity = Vector2.zero;
         }
-
 
         //敌人移动的动画
         if (moveDirection != Vector3.zero)

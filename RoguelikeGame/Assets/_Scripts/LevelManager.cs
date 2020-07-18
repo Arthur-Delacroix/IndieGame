@@ -19,6 +19,8 @@ public class LevelManager : MonoBehaviour
     //[SerializeField] private bool isPaused;
    public bool isPaused;
 
+    public int currentCoins;
+
     private void Awake()
     {
         ins = this;
@@ -50,6 +52,7 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(nextLevel);
     }
 
+    //暂停/继续 游戏
     public void PauseUnpause()
     {
         if (!isPaused)
@@ -67,6 +70,23 @@ public class LevelManager : MonoBehaviour
             isPaused = false;
 
             Time.timeScale = 1f;
+        }
+    }
+
+    //获得金币
+    public void GetCoins(int _amount)
+    {
+        currentCoins += _amount;
+    }
+
+    //消费金币
+    public void SpendCoins(int _amount)
+    {
+        currentCoins -= _amount;
+
+        if (currentCoins<0)
+        {
+            currentCoins = 0;
         }
     }
 }
