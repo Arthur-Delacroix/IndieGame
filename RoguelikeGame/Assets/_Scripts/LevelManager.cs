@@ -17,8 +17,9 @@ public class LevelManager : MonoBehaviour
 
     //检测关卡是否处在暂停状态
     //[SerializeField] private bool isPaused;
-   public bool isPaused;
+    public bool isPaused;
 
+    //玩家金币
     public int currentCoins;
 
     private void Awake()
@@ -84,7 +85,7 @@ public class LevelManager : MonoBehaviour
     {
         currentCoins -= _amount;
 
-        if (currentCoins<0)
+        if (currentCoins < 0)
         {
             currentCoins = 0;
         }

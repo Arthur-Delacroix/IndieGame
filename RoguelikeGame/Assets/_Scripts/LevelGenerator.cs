@@ -207,7 +207,7 @@ public class LevelGenerator : MonoBehaviour
                 Debug.LogError("no room exists!");
                 break;
 
-                //只有一个开口
+            //只有一个开口
             case 1:
                 if (_roomUp)
                 {
@@ -227,7 +227,7 @@ public class LevelGenerator : MonoBehaviour
                 }
                 break;
 
-                //2个开口
+            //2个开口
             case 2:
                 if (_roomUp && _roomDown)
                 {
@@ -255,7 +255,7 @@ public class LevelGenerator : MonoBehaviour
                 }
                 break;
 
-                //3个开口
+            //3个开口
             case 3:
                 if (_roomUp && _roomRight && _roomDown)
                 {
@@ -275,7 +275,7 @@ public class LevelGenerator : MonoBehaviour
                 }
                 break;
 
-                //4个开口
+            //4个开口
             case 4:
                 if (_roomLeft && _roomUp && _roomRight && _roomDown)
                 {
