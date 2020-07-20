@@ -30,6 +30,8 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1f;
+
+        UIController.ins.coinText.text = currentCoins.ToString();
     }
 
     private void Update()
@@ -78,6 +80,8 @@ public class LevelManager : MonoBehaviour
     public void GetCoins(int _amount)
     {
         currentCoins += _amount;
+
+        UIController.ins.coinText.text = currentCoins.ToString();
     }
 
     //消费金币
@@ -89,5 +93,7 @@ public class LevelManager : MonoBehaviour
         {
             currentCoins = 0;
         }
+
+        UIController.ins.coinText.text = currentCoins.ToString();
     }
 }

@@ -16,6 +16,10 @@ public class UIController : MonoBehaviour
     //显示生命值的UI文字
     public Text healthText;
 
+    //金币文字
+    public Text coinText;
+
+
     //游戏结束界面
     public GameObject deathScreen;
 
@@ -29,8 +33,7 @@ public class UIController : MonoBehaviour
     //
     [SerializeField] private bool fadeOutBlack;
 
-    //[SerializeField] private GameObject pauseMenu;
-
+    //暂停界面
     public GameObject pauseMenu;
 
     private void Awake()

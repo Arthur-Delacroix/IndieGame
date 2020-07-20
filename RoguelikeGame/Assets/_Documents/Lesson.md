@@ -57,4 +57,9 @@ composite Collider 2D 作用是将多个相邻，且带Tilemap collider 2D的物
 - 多个敌人的各种属性最好使用继承
 
 - 目前敌人不会像玩家控制的人物那样翻转，即面朝方向和移动方向相同，需要修改
+
 - 子弹 粒子等效果，需要对象池
+
+- 需要一个计时器类，在游戏过程中各个地方试用的计时方法，都用这个类代替
+	- 参考链接 https://github.com/akbiggs/UnityTimer
+	- 其中asmdef文件相关资料 https://blog.csdn.net/iningwei/article/details/91046449
