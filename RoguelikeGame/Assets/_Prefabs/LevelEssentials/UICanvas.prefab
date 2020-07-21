@@ -1932,6 +1932,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 7491500624858567829}
   healthText: {fileID: 7491500624914488849}
+  coinText: {fileID: 4174397644103559358}
   deathScreen: {fileID: 7491500624883155348}
   fadeScreen: {fileID: 7491500625170182073}
   fadeSpeed: 1

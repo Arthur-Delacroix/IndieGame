@@ -315,6 +315,10 @@ MonoBehaviour:
   fireRate: 0.5
   theBody: {fileID: 8457163523225234430}
   shotRange: 5
+  shouldDropItem: 1
+  itemToDrop:
+  - {fileID: 7655582756042689098, guid: ad8a16d5c195cd648b23cd59816c4daf, type: 3}
+  itemDropPercent: 30
 --- !u!114 &7358652381398113376
 MonoBehaviour:
   m_ObjectHideFlags: 0

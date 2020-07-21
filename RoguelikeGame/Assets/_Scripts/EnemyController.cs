@@ -69,6 +69,14 @@ public class EnemyController : MonoBehaviour
     //敌人的射击范围，玩家进入该范围内才会进行射击
     [SerializeField] private float shotRange;
 
+    //掉落道具相关
+    //是否会掉落道具
+    [SerializeField] private bool shouldDropItem;
+    //箱子会掉落的道具prefab
+    [SerializeField] private GameObject[] itemToDrop;
+    //掉落物品的几率
+    [SerializeField] private float itemDropPercent;
+
     private void Start()
     {
         if (shouldWander)
@@ -216,6 +224,23 @@ public class EnemyController : MonoBehaviour
             float _randomRot = Random.Range(0, 4);
 
             Instantiate(deathSplatters[_selectedSplatter], transform.position, Quaternion.Euler(0, 0, _randomRot * 90f));
+
+            //触发掉落物品
+            if (shouldDropItem)
+            {
+                //首先随机产生一个0到100的数值
+                float dropChance = Random.Range(0f, 100f);
+
+                //判断该数值是否在掉落几率内
+                if (dropChance < itemDropPercent)
+                {
+                    //随机选择一个掉落物品
+                    int randomItem = Random.Range(0, itemToDrop.Length);
+
+                    //生成掉落物品
+                    Instantiate(itemToDrop[randomItem], transform.position, transform.rotation);
+                }
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿1. Step1
+﻿### 相关知识点记录
 - 导入角色资源
 pixels per unit 表示一个Unity内的单位，可以容纳一张贴图的几个像素
 
@@ -26,7 +26,7 @@ Layers之间的的忽略关系，在Edit -> Project Settings -> Physics2D -> Lay
 UGUI中的文字outline和shadow，可以多次叠加，描边线是基于上一次次的轮廓继续描边，影子是基于上一次影子的外边缘添加影子
 利用此特性可以实现有立体感的文字等效果
 
-当animation录制的时候，在Inspector面板上，在Transform的Position问字处右键，会弹出一个菜单，点击“Add kye”就可以在当前点创建关键帧
+当animation录制的时候，在Inspector面板上，在Transform的Position问字处右键，会弹出一个菜单，点击“Add key”就可以在当前点创建关键帧
 
 Animator中，trigger和bool的区别
 bool只根据你代码设置确定是真或者假，想根据某条件控制状态机时使用。
@@ -36,7 +36,9 @@ trigger是触发器，代码设置后为真，状态根据此条件处理过一�
 
 composite Collider 2D 作用是将多个相邻，且带Tilemap collider 2D的物体的 collider合并，看作一个整体
 
-[TODO]
+### [TODO]
+- 重新设计程序结构，抽象相关的类，UML
+
 - 人物dash时产生拖尾的粒子效果
 
 - 敌人子弹消失时的粒子效果，类似玩家子弹消失的粒子效果
@@ -61,5 +63,7 @@ composite Collider 2D 作用是将多个相邻，且带Tilemap collider 2D的物
 - 子弹 粒子等效果，需要对象池
 
 - 需要一个计时器类，在游戏过程中各个地方试用的计时方法，都用这个类代替
-	- 参考链接 https://github.com/akbiggs/UnityTimer
-	- 其中asmdef文件相关资料 https://blog.csdn.net/iningwei/article/details/91046449
+	- [参考链接](https://github.com/akbiggs/UnityTimer)
+	- [其中asmdef文件相关资料](https://blog.csdn.net/iningwei/article/details/91046449)
+
+- [UML相关知识链接](https://www.bilibili.com/video/BV11b411c7hp)

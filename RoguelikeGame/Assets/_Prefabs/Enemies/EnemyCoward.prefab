@@ -157,6 +157,9 @@ MonoBehaviour:
   wanderCounter: 0
   pauseCounter: 0
   wanderDirection: {x: 0, y: 0, z: 0}
+  shouldPatrol: 0
+  patrolPoints: []
+  currentPatrolPoint: 0
   anim: {fileID: 4805703206073618141}
   health: 150
   deathSplatters:
@@ -172,6 +175,10 @@ MonoBehaviour:
   fireRate: 0.5
   theBody: {fileID: 4805703206728143950}
   shotRange: 7
+  shouldDropItem: 1
+  itemToDrop:
+  - {fileID: 7655582756042689098, guid: ad8a16d5c195cd648b23cd59816c4daf, type: 3}
+  itemDropPercent: 30
 --- !u!1 &4805703206728143952
 GameObject:
   m_ObjectHideFlags: 0
