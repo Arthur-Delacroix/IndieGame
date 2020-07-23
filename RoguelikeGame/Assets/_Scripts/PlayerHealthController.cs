@@ -12,7 +12,7 @@ public class PlayerHealthController : MonoBehaviour
     [SerializeField] private int currentHealth;
 
     //人物最大生命值
-    [SerializeField] private int maxHealth;
+    public int maxHealth;
 
     //中弹后的无敌时间
     [SerializeField] private float damageInvincLength = 1f;
