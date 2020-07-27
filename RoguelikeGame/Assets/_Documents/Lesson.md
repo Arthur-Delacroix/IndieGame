@@ -25,3 +25,9 @@ Layers之间的的忽略关系，在Edit -> Project Settings -> Physics2D -> Lay
 
 UGUI中的文字outline和shadow，可以多次叠加，描边线是基于上一次次的轮廓继续描边，影子是基于上一次影子的外边缘添加影子
 利用此特性可以实现有立体感的文字等效果
+
+当animation录制的时候，在Inspector面板上，在Transform的Position问字处右键，会弹出一个菜单，点击“Add kye”就可以在当前点创建关键帧
+
+Animator中，trigger和bool的区别
+bool只根据你代码设置确定是真或者假，想根据某条件控制状态机时使用。
+trigger是触发器，代码设置后为真，状态根据此条件处理过一次后重设为假，可以当“事件”使用。

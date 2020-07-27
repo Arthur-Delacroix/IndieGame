@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     //冲刺中的无敌时间
     [SerializeField] private float dashInvincibility;
     //技能持续时间的计数器
-    private float dashCounter;
+    public float dashCounter;
     //技能冷却时间计数器
     private float dashCooldownCounter;
 
@@ -147,6 +147,10 @@ public class PlayerController : MonoBehaviour
             {
                 activeMoveSpeed = dashSpeed;
                 dashCounter = dashDuration;
+
+                anim.SetTrigger("dash");
+
+                PlayerHealthController.ins.MakeInvincible(dashInvincibility);
             }
         }
 

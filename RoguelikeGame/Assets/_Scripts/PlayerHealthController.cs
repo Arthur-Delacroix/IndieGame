@@ -48,6 +48,7 @@ public class PlayerHealthController : MonoBehaviour
         }
     }
 
+    //玩家受到伤害后触发
     public void DamagePlayer()
     {
         //受伤之前先判断是否处在无敌时间内
@@ -67,7 +68,16 @@ public class PlayerHealthController : MonoBehaviour
 
             invincCount = damageInvincLength;
 
+            //受伤后玩家身体变成半透明
             PlayerController.ins.bodySR.color = new Color(1, 1, 1, 0.5f);
         }
+    }
+
+    //_length 无敌时长
+    public void MakeInvincible(float _length)
+    {
+        invincCount = _length;
+
+        PlayerController.ins.bodySR.color = new Color(1, 1, 1, 0.5f);
     }
 }
