@@ -18,6 +18,15 @@ public class LevelGenerator : MonoBehaviour
     //关卡结束房间的颜色
     [SerializeField] private Color endColor;
 
+    //当前地图生成时候是否会创建商店
+    [SerializeField] private bool isIncludeShop;
+    //商店房间生成造数组中的范围
+    [SerializeField] private int minDistanceToShop;
+    [SerializeField] private int maxDistanceToShop;
+
+    //商店房间的颜色
+    [SerializeField] private Color shopColor;
+
     //创建房间的起始点
     [SerializeField] private Transform generatorPoint;
 
@@ -38,6 +47,9 @@ public class LevelGenerator : MonoBehaviour
     //存储当前关卡的最后一个房间
     [SerializeField] private GameObject endRoom;
 
+    //商店房间的实例
+    [SerializeField] private GameObject shopRoom;
+
     //存储所有房间的链表
     [SerializeField] private List<GameObject> layoutRoomObjects = new List<GameObject>();
 
@@ -51,6 +63,8 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private RoomCenter centerStart;
     //结束的房间
     [SerializeField] private RoomCenter centerEnd;
+    //商店
+    [SerializeField] private RoomCenter centerShop;
     //各种不同样式的中间房间
     [SerializeField] private RoomCenter[] potentialCenters;
 
@@ -94,6 +108,19 @@ public class LevelGenerator : MonoBehaviour
             }
         }
 
+        //生成商店
+        if (isIncludeShop)
+        {
+            int _shopSelector = Random.Range(minDistanceToShop, maxDistanceToShop + 1);
+
+            shopRoom = layoutRoomObjects[_shopSelector];
+
+            layoutRoomObjects.RemoveAt(_shopSelector);
+
+            shopRoom.GetComponent<SpriteRenderer>().color = shopColor;
+        }
+        //生成商店 end
+
         //创建初始房间的开口方向
         CreateRoomOutline(Vector3.zero);
 
@@ -106,20 +133,75 @@ public class LevelGenerator : MonoBehaviour
         //创建最后一个房间的开口方向
         CreateRoomOutline(endRoom.transform.position);
 
+        if (isIncludeShop)
+        {
+            CreateRoomOutline(shopRoom.transform.position);
+        }
+
         //生成房间的内容
         foreach (GameObject _outline in generatedOutlines)
         {
-            if (generatedOutlines.IndexOf(_outline) == 0)
+            //if (generatedOutlines.IndexOf(_outline) == 0)
+            //{
+            //    RoomCenter _tmp1 = Instantiate(centerStart, _outline.transform.position, _outline.transform.rotation);
+            //    _tmp1.theRoom = _outline.GetComponent<Room>();
+            //}
+            //else if (generatedOutlines.IndexOf(_outline) == generatedOutlines.Count - 1)
+            //{
+            //    RoomCenter _tmp2 = Instantiate(centerEnd, _outline.transform.position, _outline.transform.rotation);
+            //    _tmp2.theRoom = _outline.GetComponent<Room>();
+            //}
+            //else
+            //{
+            //    //从数组中随机算则一个房间内容
+            //    int _centerSelect = Random.Range(0, potentialCenters.Length);
+
+            //    //实例化该房间内容
+            //    RoomCenter _tmp = Instantiate(potentialCenters[_centerSelect], _outline.transform.position, _outline.transform.rotation);
+
+            //    //将房间内容与房间外框连接起来
+            //    _tmp.theRoom = _outline.GetComponent<Room>();
+            //}
+
+            //if (isIncludeShop)
+            //{
+            //    if (_outline.transform.position == shopRoom.transform.position)
+            //    {
+            //        RoomCenter _tmp = Instantiate(centerShop, transform.position, transform.rotation);
+            //        _tmp.theRoom = _outline.GetComponent<Room>();
+            //    }
+            //}
+
+            bool generateCenter = true;
+
+            if (_outline.transform.position == Vector3.zero)
             {
                 RoomCenter _tmp1 = Instantiate(centerStart, _outline.transform.position, _outline.transform.rotation);
                 _tmp1.theRoom = _outline.GetComponent<Room>();
+
+                generateCenter = false;
             }
-            else if (generatedOutlines.IndexOf(_outline) == generatedOutlines.Count - 1)
+
+            if (_outline.transform.position == endRoom.transform.position)
             {
-                RoomCenter _tmp2 = Instantiate(centerEnd, _outline.transform.position, _outline.transform.rotation);
-                _tmp2.theRoom = _outline.GetComponent<Room>();
+                RoomCenter _tmp1 = Instantiate(centerEnd, _outline.transform.position, _outline.transform.rotation);
+                _tmp1.theRoom = _outline.GetComponent<Room>();
+
+                generateCenter = false;
             }
-            else
+
+            if (isIncludeShop)
+            {
+                if (_outline.transform.position == shopRoom.transform.position)
+                {
+                    RoomCenter _tmp = Instantiate(centerShop, _outline.transform.position, _outline.transform.rotation);
+                    _tmp.theRoom = _outline.GetComponent<Room>();
+
+                    generateCenter = false;
+                }
+            }
+
+            if (generateCenter)
             {
                 //从数组中随机算则一个房间内容
                 int _centerSelect = Random.Range(0, potentialCenters.Length);

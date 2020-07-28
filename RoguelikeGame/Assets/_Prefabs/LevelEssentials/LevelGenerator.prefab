@@ -49,6 +49,10 @@ MonoBehaviour:
   distanceToEnd: 10
   startColor: {r: 0, g: 1, b: 0, a: 1}
   endColor: {r: 1, g: 0, b: 0, a: 1}
+  isIncludeShop: 1
+  minDistanceToShop: 3
+  maxDistanceToShop: 7
+  shopColor: {r: 0, g: 0.060156107, b: 1, a: 1}
   generatorPoint: {fileID: 7337585949972291718}
   selectedDirection: 0
   xOffset: 18
@@ -56,7 +60,9 @@ MonoBehaviour:
   whatIsRoom:
     serializedVersion: 2
     m_Bits: 32768
-  endRoom: {fileID: 0}
+  endRoom: {fileID: 2475082439213002233, guid: 38ab6dbd83ec1b640b55ca4607d3049e, type: 3}
+  shopRoom: {fileID: 2475082439213002233, guid: 382a58abef2a39a47803fc7aa4b3b593,
+    type: 3}
   layoutRoomObjects: []
   rooms:
     singleUp: {fileID: 6609019464703485973, guid: 1eef018c50876e44cb1d9b7355b8e553,
