@@ -217,11 +217,12 @@ public class LevelGenerator : MonoBehaviour
         //销毁所有辅助定位用的layout
         foreach (GameObject _layout in layoutRoomObjects)
         {
-            Destroy(_layout);
+            //Destroy(_layout);
+            _layout.GetComponent<BoxCollider2D>().enabled = false;
         }
-        layoutRoomObjects.Clear();
-        Destroy(_startTmp);
-        Destroy(endRoom);
+        //layoutRoomObjects.Clear();
+        //Destroy(_startTmp);
+        //Destroy(endRoom);
 
 
     }
