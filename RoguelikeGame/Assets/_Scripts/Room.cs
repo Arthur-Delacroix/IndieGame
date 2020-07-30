@@ -22,6 +22,8 @@ public class Room : MonoBehaviour
     //是否为玩家当前进入的房间
     public bool roomActive;
 
+    [SerializeField] private GameObject mapHider;
+
     private void Update()
     {
         //检测房间内是不是所有的敌人都被消灭了
@@ -73,6 +75,8 @@ public class Room : MonoBehaviour
             }
 
             roomActive = true;
+
+            mapHider.SetActive(false);
         }
     }
 

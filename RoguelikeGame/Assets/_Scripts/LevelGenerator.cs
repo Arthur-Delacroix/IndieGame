@@ -220,6 +220,9 @@ public class LevelGenerator : MonoBehaviour
             //Destroy(_layout);
             _layout.GetComponent<BoxCollider2D>().enabled = false;
         }
+        _startTmp.GetComponent<BoxCollider2D>().enabled = false;
+        endRoom.GetComponent<BoxCollider2D>().enabled = false;
+
         //layoutRoomObjects.Clear();
         //Destroy(_startTmp);
         //Destroy(endRoom);
