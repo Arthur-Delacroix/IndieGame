@@ -36,6 +36,9 @@ public class UIController : MonoBehaviour
     //暂停界面
     public GameObject pauseMenu;
 
+    //小地图UI实例
+    public GameObject mapDisplay;
+
     private void Awake()
     {
         ins = this;

@@ -22,6 +22,7 @@ public class Room : MonoBehaviour
     //是否为玩家当前进入的房间
     public bool roomActive;
 
+    //小地图上的遮挡片，当玩家进入新的房间时候，该片会消失，露出来地图房间
     [SerializeField] private GameObject mapHider;
 
     private void Update()

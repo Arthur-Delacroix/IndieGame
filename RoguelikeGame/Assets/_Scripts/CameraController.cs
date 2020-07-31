@@ -13,6 +13,12 @@ public class CameraController : MonoBehaviour
     //目标房间坐标
     [SerializeField] private Transform target;
 
+    //游戏视图 和 大地图视图切换用的camera
+    [SerializeField] private Camera mainCamera;
+    [SerializeField] private Camera bigMapCamera;
+    //是否显示大地图
+    [SerializeField] private bool isBigMapActive;
+
     private void Awake()
     {
         ins = this;
@@ -25,11 +31,55 @@ public class CameraController : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.position.x, target.position.y, transform.position.z), moveSpeed * Time.deltaTime);
         }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            if (!isBigMapActive)
+            {
+                ActivateBigMap();
+            }
+            else
+            {
+                DeactivateBigMap();
+            }
+        }
     }
 
     //位置切换到目标房间
     public void ChangeTarget(Transform _newTarget)
     {
         target = _newTarget;
+    }
+
+    public void ActivateBigMap()
+    {
+        if (!LevelManager.ins.isPaused)
+        {
+            isBigMapActive = true;
+
+            bigMapCamera.enabled = true;
+            mainCamera.enabled = false;
+
+            PlayerController.ins.canMove = false;
+            Time.timeScale = 0f;
+
+            UIController.ins.mapDisplay.SetActive(false);
+        }
+    }
+
+    public void DeactivateBigMap()
+    {
+        if (!LevelManager.ins.isPaused)
+        {
+            isBigMapActive = false;
+
+            bigMapCamera.enabled = false;
+            mainCamera.enabled = true;
+
+            PlayerController.ins.canMove = true;
+            Time.timeScale = 1f;
+
+            UIController.ins.mapDisplay.SetActive(true);
+        }
     }
 }
