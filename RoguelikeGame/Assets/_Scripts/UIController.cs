@@ -39,6 +39,9 @@ public class UIController : MonoBehaviour
     //小地图UI实例
     public GameObject mapDisplay;
 
+    //全屏地图的文字
+    public GameObject bigMapText;
+
     private void Awake()
     {
         ins = this;

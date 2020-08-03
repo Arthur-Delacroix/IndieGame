@@ -64,6 +64,7 @@ public class CameraController : MonoBehaviour
             Time.timeScale = 0f;
 
             UIController.ins.mapDisplay.SetActive(false);
+            UIController.ins.bigMapText.SetActive(true);
         }
     }
 
@@ -80,6 +81,7 @@ public class CameraController : MonoBehaviour
             Time.timeScale = 1f;
 
             UIController.ins.mapDisplay.SetActive(true);
+            UIController.ins.bigMapText.SetActive(false);
         }
     }
 }
