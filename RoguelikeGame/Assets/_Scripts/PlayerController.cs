@@ -39,18 +39,18 @@ public class PlayerController : MonoBehaviour
     //动画控制器组件
     [SerializeField] private Animator anim;
 
-    //子弹预置
-    [SerializeField] private GameObject bulletToFire;
+    ////子弹预置
+    //[SerializeField] private GameObject bulletToFire;
 
-    //子弹的射出点
-    [SerializeField] private Transform firePoint;
+    ////子弹的射出点
+    //[SerializeField] private Transform firePoint;
 
-    //当鼠标按下后，两个子弹的出现间隔
-    //射速
-    [SerializeField] private float timeBetweenShots;
+    ////当鼠标按下后，两个子弹的出现间隔
+    ////射速
+    //[SerializeField] private float timeBetweenShots;
 
-    //这个变量用来触发连续射击
-    private float shotCounter;
+    ////这个变量用来触发连续射击
+    //private float shotCounter;
 
     //身体的sprite组件，用来显示中弹后无敌时间的效果
     public SpriteRenderer bodySR;
@@ -118,34 +118,34 @@ public class PlayerController : MonoBehaviour
             //旋转拿枪的Sprite
             gunArm.rotation = Quaternion.Euler(0, 0, angle);
 
-            //人物开枪射击
-            if (Input.GetMouseButtonDown(0))
-            {
-                Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
+            ////人物开枪射击
+            //if (Input.GetMouseButtonDown(0))
+            //{
+            //    Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
 
-                shotCounter = timeBetweenShots;
+            //    shotCounter = timeBetweenShots;
 
-                AudioManager.ins.playSFX(12);
-            }
+            //    AudioManager.ins.playSFX(12);
+            //}
 
-            //连续射击
-            //当鼠标一直按下的时候，shotCounter开始随时间变小，当小于等于0的时候就会触发连续射击
-            //每次射出子弹后，重新初始化shotCounter的值
-            //这样保证了玩家一直按下鼠标时候不会立刻触发连续射击，然后每次连续射击的最大射速和连点的最大射速相同
-            //连续射击和连点射击的最大射速，都是timeBetweenShots控制
-            if (Input.GetMouseButton(0))
-            {
-                shotCounter -= Time.deltaTime;
+            ////连续射击
+            ////当鼠标一直按下的时候，shotCounter开始随时间变小，当小于等于0的时候就会触发连续射击
+            ////每次射出子弹后，重新初始化shotCounter的值
+            ////这样保证了玩家一直按下鼠标时候不会立刻触发连续射击，然后每次连续射击的最大射速和连点的最大射速相同
+            ////连续射击和连点射击的最大射速，都是timeBetweenShots控制
+            //if (Input.GetMouseButton(0))
+            //{
+            //    shotCounter -= Time.deltaTime;
 
-                if (shotCounter <= 0)
-                {
-                    Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
+            //    if (shotCounter <= 0)
+            //    {
+            //        Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
 
-                    AudioManager.ins.playSFX(12);
+            //        AudioManager.ins.playSFX(12);
 
-                    shotCounter = timeBetweenShots;
-                }
-            }
+            //        shotCounter = timeBetweenShots;
+            //    }
+            //}
 
             //按下按键触发无敌
             if (Input.GetKeyDown(KeyCode.Space))
