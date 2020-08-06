@@ -130,4 +130,4 @@ MonoBehaviour:
   bulletToFire: {fileID: 4020702740758208593, guid: d3b7b0e529395004b9d93879c8cd1a17,
     type: 3}
   firePoint: {fileID: 1487305914062783078}
-  timeBetweenShots: 0.2
+  timeBetweenShots: 0.75
