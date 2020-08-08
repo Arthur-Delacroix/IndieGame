@@ -60,6 +60,9 @@ public class PlayerController : MonoBehaviour
 
     public bool canMove = true;
 
+    [SerializeField] private List<Gun> availableGuns = new List<Gun>();
+    [SerializeField] private int  currentGun;
+
     private void Awake()
     {
         ins = this;
@@ -147,6 +150,22 @@ public class PlayerController : MonoBehaviour
             //    }
             //}
 
+            //切换武器
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                if (availableGuns.Count>0)
+                {
+                    currentGun++;
+
+                    if (currentGun>=availableGuns.Count)
+                    {
+                        currentGun = 0;
+                    }
+
+                    SwitchGun();
+                }
+            }
+
             //按下按键触发无敌
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -196,5 +215,15 @@ public class PlayerController : MonoBehaviour
             theRB.velocity = Vector2.zero;
             anim.SetBool("isMoving", false);
         }
+    }
+
+    public void SwitchGun()
+    {
+        foreach (Gun _theGun in availableGuns)
+        {
+            _theGun.gameObject.SetActive(false);
+        }
+
+        availableGuns[currentGun].gameObject.SetActive(true);
     }
 }
