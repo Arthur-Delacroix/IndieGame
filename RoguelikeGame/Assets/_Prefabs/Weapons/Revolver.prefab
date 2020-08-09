@@ -101,6 +101,9 @@ MonoBehaviour:
     type: 3}
   firePoint: {fileID: 5797390650803125162}
   timeBetweenShots: 1
+  weaponName: Revolver
+  weaponSprite: {fileID: -3940896912681915257, guid: f72804754a2106a4884d758772ef2a02,
+    type: 3}
 --- !u!1 &5797390650803125163
 GameObject:
   m_ObjectHideFlags: 0

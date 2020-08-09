@@ -36,6 +36,8 @@ pixels per unit 表示一个Unity内的单位，可以容纳一张贴图的几�
 
 - composite Collider 2D 作用是将多个相邻，且带Tilemap collider 2D的物体的 collider合并，看作一个整体
 
+- UI中image组件等preserve aspect勾选后，将图片放入该image上后，会保持图片等尺寸比例
+
 ### [TODO]
 - 重新设计程序结构，抽象相关的类，UML
 	- Sequence diagram 时序图
@@ -80,3 +82,5 @@ pixels per unit 表示一个Unity内的单位，可以容纳一张贴图的几�
 - [UML相关知识链接](https://www.bilibili.com/video/BV11b411c7hp)
 
 - 多语言配置
+
+- 简单的技能系统，包括技能图标，冷却的动画，触发技能和冷却结束等逻辑

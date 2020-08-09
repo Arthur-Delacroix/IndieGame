@@ -19,6 +19,11 @@ public class Gun : MonoBehaviour
     //这个变量用来触发连续射击
     private float shotCounter;
 
+    //枪械名字，用于显示在ui文字上
+    public string weaponName;
+    //枪械等ui图片
+    public Sprite weaponSprite;
+
     private void Update()
     {
         if (PlayerController.ins.canMove && !LevelManager.ins.isPaused)

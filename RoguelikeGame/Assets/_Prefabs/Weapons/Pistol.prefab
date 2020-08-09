@@ -131,3 +131,6 @@ MonoBehaviour:
     type: 3}
   firePoint: {fileID: 1487305914062783078}
   timeBetweenShots: 0.75
+  weaponName: Pistol
+  weaponSprite: {fileID: 262978286505467586, guid: f72804754a2106a4884d758772ef2a02,
+    type: 3}

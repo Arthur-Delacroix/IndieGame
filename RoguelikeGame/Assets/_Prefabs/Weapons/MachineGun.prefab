@@ -131,3 +131,6 @@ MonoBehaviour:
     type: 3}
   firePoint: {fileID: 6805283157675121691}
   timeBetweenShots: 0.2
+  weaponName: MachineGun
+  weaponSprite: {fileID: -2172343002418747524, guid: f72804754a2106a4884d758772ef2a02,
+    type: 3}

@@ -42,6 +42,9 @@ public class UIController : MonoBehaviour
     //全屏地图的文字
     public GameObject bigMapText;
 
+    public Image currentGunImage;
+    public Text currentGunText;
+
     private void Awake()
     {
         ins = this;

@@ -71,6 +71,9 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         activeMoveSpeed = moveSpeed;
+
+        UIController.ins.currentGunImage.sprite = availableGuns[currentGun].weaponSprite;
+        UIController.ins.currentGunText.text = availableGuns[currentGun].weaponName;
     }
 
     void Update()
@@ -225,5 +228,8 @@ public class PlayerController : MonoBehaviour
         }
 
         availableGuns[currentGun].gameObject.SetActive(true);
+
+        UIController.ins.currentGunImage.sprite = availableGuns[currentGun].weaponSprite;
+        UIController.ins.currentGunText.text = availableGuns[currentGun].weaponName;
     }
 }
