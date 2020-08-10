@@ -36,7 +36,7 @@ public class Gun : MonoBehaviour
             {
 
                 //人物开枪射击
-                if (Input.GetMouseButtonDown(0)|| Input.GetMouseButton(0))
+                if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
                 {
                     Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
 

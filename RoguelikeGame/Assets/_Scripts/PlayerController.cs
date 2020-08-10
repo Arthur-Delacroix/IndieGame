@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D theRB;
 
     //拿枪的Sprite
-    [SerializeField] private Transform gunArm;
+    [SerializeField] public Transform gunArm;
 
     //主摄像机
     [SerializeField] private Camera theCam;
@@ -60,8 +60,8 @@ public class PlayerController : MonoBehaviour
 
     public bool canMove = true;
 
-    [SerializeField] private List<Gun> availableGuns = new List<Gun>();
-    [SerializeField] private int  currentGun;
+    [SerializeField] public List<Gun> availableGuns = new List<Gun>();
+    [SerializeField] public int currentGun;
 
     private void Awake()
     {
@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (canMove&&!LevelManager.ins.isPaused)
+        if (canMove && !LevelManager.ins.isPaused)
         {
             //将移动方向的X Y分别绑定到输入轴向上
             moveInput.x = Input.GetAxisRaw("Horizontal");
@@ -156,11 +156,11 @@ public class PlayerController : MonoBehaviour
             //切换武器
             if (Input.GetKeyDown(KeyCode.Tab))
             {
-                if (availableGuns.Count>0)
+                if (availableGuns.Count > 0)
                 {
                     currentGun++;
 
-                    if (currentGun>=availableGuns.Count)
+                    if (currentGun >= availableGuns.Count)
                     {
                         currentGun = 0;
                     }
