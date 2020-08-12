@@ -68,6 +68,18 @@ public class LevelGenerator : MonoBehaviour
     //各种不同样式的中间房间
     [SerializeField] private RoomCenter[] potentialCenters;
 
+    //武器房间相关
+    [SerializeField] private bool includeGunRoom;
+    //武器房间生成造数组中的范围
+    [SerializeField] private int minDistanceToGunRoom;
+    [SerializeField] private int maxDistanceToGunRoom;
+    //武器房间的实例
+    [SerializeField] private GameObject gunRoom;
+    //武器房间
+    [SerializeField] private RoomCenter centerGunRoom;
+
+    [SerializeField] private Color gunRoomColor;
+
     private void Start()
     {
         GameObject _startTmp;
@@ -121,6 +133,20 @@ public class LevelGenerator : MonoBehaviour
         }
         //生成商店 end
 
+        //生成武器房间
+        if (includeGunRoom)
+        {
+            int _gunRoomSelector = Random.Range(minDistanceToGunRoom, maxDistanceToGunRoom + 1);
+
+            gunRoom = layoutRoomObjects[_gunRoomSelector];
+
+            layoutRoomObjects.RemoveAt(_gunRoomSelector);
+
+            gunRoom.GetComponent<SpriteRenderer>().color = gunRoomColor;
+        }
+        //生成武器房间 end
+
+
         //创建初始房间的开口方向
         CreateRoomOutline(Vector3.zero);
 
@@ -136,6 +162,11 @@ public class LevelGenerator : MonoBehaviour
         if (isIncludeShop)
         {
             CreateRoomOutline(shopRoom.transform.position);
+        }
+
+        if (includeGunRoom)
+        {
+            CreateRoomOutline(gunRoom.transform.position);
         }
 
         //生成房间的内容
@@ -200,6 +231,19 @@ public class LevelGenerator : MonoBehaviour
                     generateCenter = false;
                 }
             }
+
+            //生成武器房间
+            if (includeGunRoom)
+            {
+                if (_outline.transform.position == gunRoom.transform.position)
+                {
+                    RoomCenter _tmp = Instantiate(centerGunRoom, _outline.transform.position, _outline.transform.rotation);
+                    _tmp.theRoom = _outline.GetComponent<Room>();
+
+                    generateCenter = false;
+                }
+            }
+            //生成武器房间 end
 
             if (generateCenter)
             {

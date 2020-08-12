@@ -2269,6 +2269,41 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5561991997246279399, guid: 382a58abef2a39a47803fc7aa4b3b593,
         type: 3}
+    - target: {fileID: 7337585949619324342, guid: 9f31da0341ff232408b9c0a1ab9eeb1a,
+        type: 3}
+      propertyPath: includeGunRoom
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7337585949619324342, guid: 9f31da0341ff232408b9c0a1ab9eeb1a,
+        type: 3}
+      propertyPath: minDistanceToGunRoom
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7337585949619324342, guid: 9f31da0341ff232408b9c0a1ab9eeb1a,
+        type: 3}
+      propertyPath: maxDistanceToGunRoom
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7337585949619324342, guid: 9f31da0341ff232408b9c0a1ab9eeb1a,
+        type: 3}
+      propertyPath: gunRoomColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7337585949619324342, guid: 9f31da0341ff232408b9c0a1ab9eeb1a,
+        type: 3}
+      propertyPath: gunRoomColor.g
+      value: 0.94731724
+      objectReference: {fileID: 0}
+    - target: {fileID: 7337585949619324342, guid: 9f31da0341ff232408b9c0a1ab9eeb1a,
+        type: 3}
+      propertyPath: gunRoomColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7337585949619324342, guid: 9f31da0341ff232408b9c0a1ab9eeb1a,
+        type: 3}
+      propertyPath: gunRoomColor.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f31da0341ff232408b9c0a1ab9eeb1a, type: 3}
 --- !u!1 &1353405267
