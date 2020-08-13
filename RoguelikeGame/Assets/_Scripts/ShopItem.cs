@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 #pragma warning disable 649
 
@@ -22,6 +23,30 @@ public class ShopItem : MonoBehaviour
 
     //增加最大生命值上限的量
     [SerializeField] private int healthUpgradeAmount;
+
+    [SerializeField] private Gun[] potentialGuns;
+
+    private Gun theGun;
+
+    [SerializeField] private SpriteRenderer gunSprite;
+
+    [SerializeField] private Text infoText;
+
+
+
+    private void Start()
+    {
+        if (isWeapon)
+        {
+            int selectedGun = Random.Range(0, potentialGuns.Length);
+            theGun = potentialGuns[selectedGun];
+
+            gunSprite.sprite = theGun.gunShopSprite;
+            infoText.text = theGun.weaponName + "\n - " + theGun.itemCost + " Gold - ";
+
+            prise = theGun.itemCost;
+        }
+    }
 
     //玩家进入了购买区域
     private void OnTriggerEnter2D(Collider2D _other)
@@ -66,6 +91,25 @@ public class ShopItem : MonoBehaviour
                     if (isHealthUpgrade)
                     {
                         PlayerHealthController.ins.IncreaseMaxHealth(healthUpgradeAmount);
+                    }
+
+                    if (isWeapon)
+                    {
+                        Gun gunClone = Instantiate(theGun);
+
+                        gunClone.transform.parent = PlayerController.ins.gunArm;
+
+                        gunClone.transform.localPosition = Vector3.zero;
+                        gunClone.transform.localRotation = Quaternion.Euler(Vector3.zero);
+                        gunClone.transform.localScale = Vector3.one;
+
+                        //gunClone.transform.position = PlayerController.ins.gunArm.position;
+
+                        PlayerController.ins.availableGuns.Add(gunClone);
+
+                        PlayerController.ins.currentGun = PlayerController.ins.availableGuns.Count - 1;
+
+                        PlayerController.ins.SwitchGun();
                     }
 
                     AudioManager.ins.playSFX(18);

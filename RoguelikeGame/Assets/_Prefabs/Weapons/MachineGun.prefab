@@ -134,3 +134,6 @@ MonoBehaviour:
   weaponName: MachineGun
   weaponSprite: {fileID: -2172343002418747524, guid: f72804754a2106a4884d758772ef2a02,
     type: 3}
+  itemCost: 35
+  gunShopSprite: {fileID: 6820856509940793013, guid: 48d85d1ef51430e42b6aef57f02c863d,
+    type: 3}

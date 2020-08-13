@@ -24,6 +24,11 @@ public class Gun : MonoBehaviour
     //枪械等ui图片
     public Sprite weaponSprite;
 
+    //枪械价格
+    public int itemCost;
+    //在商店中显示的图片
+    public Sprite gunShopSprite;
+
     private void Update()
     {
         if (PlayerController.ins.canMove && !LevelManager.ins.isPaused)
