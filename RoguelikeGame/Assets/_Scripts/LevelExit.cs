@@ -12,6 +12,10 @@ public class LevelExit : MonoBehaviour
     {
         if (_other.tag == "Player")
         {
+            CharacterTracker.ins.currentCoins = LevelManager.ins.currentCoins;
+            CharacterTracker.ins.maxHealth = PlayerHealthController.ins.maxHealth;
+            CharacterTracker.ins.currentHealth = PlayerHealthController.ins.currentHealth;
+
             StartCoroutine(LevelManager.ins.LevelEnd());
         }
     }

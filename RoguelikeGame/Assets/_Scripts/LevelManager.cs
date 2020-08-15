@@ -25,6 +25,8 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         ins = this;
+
+        currentCoins = CharacterTracker.ins.currentCoins;
     }
 
     private void Start()
@@ -51,6 +53,8 @@ public class LevelManager : MonoBehaviour
         UIController.ins.StartFadeToBlack();
 
         yield return new WaitForSeconds(waitToLoad);
+
+
 
         SceneManager.LoadScene(nextLevel);
     }

@@ -9,7 +9,7 @@ public class PlayerHealthController : MonoBehaviour
     public static PlayerHealthController ins;
 
     //当前人物生命值
-    [SerializeField] private int currentHealth;
+    public int currentHealth;
 
     //人物最大生命值
     public int maxHealth;
@@ -27,7 +27,10 @@ public class PlayerHealthController : MonoBehaviour
     void Start()
     {
         //初始化生命值
-        currentHealth = maxHealth;
+        //currentHealth = maxHealth;
+
+        maxHealth = CharacterTracker.ins.maxHealth;
+        currentHealth = CharacterTracker.ins.currentHealth;
 
         //设置生命值的 最大/当前 值
         UIController.ins.healthSlider.maxValue = maxHealth;
