@@ -54,6 +54,9 @@ public class UIController : MonoBehaviour
     {
         fadeOutBlack = true;
         fadeToBlack = false;
+
+        currentGunImage.sprite = PlayerController.ins.availableGuns[PlayerController.ins.currentGun].weaponSprite;
+        currentGunText.text = PlayerController.ins.availableGuns[PlayerController.ins.currentGun].weaponName;
     }
 
     void Update()

@@ -21,7 +21,7 @@ public class Gun : MonoBehaviour
 
     //枪械名字，用于显示在ui文字上
     public string weaponName;
-    //枪械等ui图片
+    //枪械的ui图片
     public Sprite weaponSprite;
 
     //枪械价格

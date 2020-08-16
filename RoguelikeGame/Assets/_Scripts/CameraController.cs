@@ -14,7 +14,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Transform target;
 
     //游戏视图 和 大地图视图切换用的camera
-    [SerializeField] private Camera mainCamera;
+    public Camera mainCamera;
     [SerializeField] private Camera bigMapCamera;
     //是否显示大地图
     [SerializeField] private bool isBigMapActive;

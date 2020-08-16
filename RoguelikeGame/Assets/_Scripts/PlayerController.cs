@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public Transform gunArm;
 
     //主摄像机
-    [SerializeField] private Camera theCam;
+    //[SerializeField] private Camera theCam;
 
     //动画控制器组件
     [SerializeField] private Animator anim;
@@ -66,6 +66,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         ins = this;
+
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
@@ -100,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
             //将鼠标的位置转换到游戏屏幕内的坐标
             Vector3 mousePos = Input.mousePosition;
-            Vector3 screenPoint = theCam.WorldToScreenPoint(transform.localPosition);
+            Vector3 screenPoint = CameraController.ins.mainCamera.WorldToScreenPoint(transform.localPosition);
 
             //判断鼠标是在人物的左面还是右面
             //人物始终要看向鼠标所在的那一侧

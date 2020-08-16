@@ -22,16 +22,21 @@ public class LevelManager : MonoBehaviour
     //玩家金币
     public int currentCoins;
 
+    [SerializeField] private Transform startPoint;
+
     private void Awake()
     {
         ins = this;
-
-        currentCoins = CharacterTracker.ins.currentCoins;
     }
 
     private void Start()
     {
         Time.timeScale = 1f;
+
+        currentCoins = CharacterTracker.ins.currentCoins;
+
+        PlayerController.ins.transform.position = startPoint.position;
+        PlayerController.ins.canMove = true;
 
         UIController.ins.coinText.text = currentCoins.ToString();
     }
