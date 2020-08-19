@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float moveSpeed;
 
     //目标房间坐标
-    [SerializeField] private Transform target;
+    public Transform target;
 
     //游戏视图 和 大地图视图切换用的camera
     public Camera mainCamera;
