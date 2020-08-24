@@ -10,6 +10,30 @@ public class CharacterSelector : MonoBehaviour
 
     public PlayerController playerToSpawn;
 
+    public bool shouldUnlock;
+
+    private void Start()
+    {
+        if (shouldUnlock)
+        {
+            if (PlayerPrefs.HasKey(playerToSpawn.name))
+            {
+                if (PlayerPrefs.GetInt(playerToSpawn.name) == 1)
+                {
+                    gameObject.SetActive(true);
+                }
+                else
+                {
+                    gameObject.SetActive(false);
+                }
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D _other)
     {
         if (_other.tag == "Player")
