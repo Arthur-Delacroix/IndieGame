@@ -10039,31 +10039,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4127770075457581784, guid: c37cfaad95fdf284d9ee0cc28d212616,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4249628273859098791, guid: c37cfaad95fdf284d9ee0cc28d212616,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5978896380801313757, guid: c37cfaad95fdf284d9ee0cc28d212616,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6070360699171353476, guid: c37cfaad95fdf284d9ee0cc28d212616,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7138732023250337125, guid: c37cfaad95fdf284d9ee0cc28d212616,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7491500624055130677, guid: c37cfaad95fdf284d9ee0cc28d212616,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10173,31 +10148,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UICanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 7491500624055130681, guid: c37cfaad95fdf284d9ee0cc28d212616,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7491500624388784715, guid: c37cfaad95fdf284d9ee0cc28d212616,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7491500624388784715, guid: c37cfaad95fdf284d9ee0cc28d212616,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7491500624883155348, guid: c37cfaad95fdf284d9ee0cc28d212616,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7491500625170182075, guid: c37cfaad95fdf284d9ee0cc28d212616,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c37cfaad95fdf284d9ee0cc28d212616, type: 3}

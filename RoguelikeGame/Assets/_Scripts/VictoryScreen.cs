@@ -16,6 +16,8 @@ public class VictoryScreen : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1f;
+
+        Destroy(PlayerController.ins.gameObject);
     }
 
     private void Update()

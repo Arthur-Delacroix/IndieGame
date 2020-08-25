@@ -106,4 +106,13 @@ public class UIController : MonoBehaviour
 
         LevelManager.ins.PauseUnpause();
     }
+
+    public void ReturnMainMenu(string _sceneName)
+    {
+        Time.timeScale = 1f;
+
+        SceneManager.LoadScene(_sceneName);
+
+        Destroy(PlayerController.ins.gameObject);
+    }
 }

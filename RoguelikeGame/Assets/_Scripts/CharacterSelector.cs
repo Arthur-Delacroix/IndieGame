@@ -13,7 +13,7 @@ public class CharacterSelector : MonoBehaviour
     public bool shouldUnlock;
 
     private void Start()
-    {
+    { 
         if (shouldUnlock)
         {
             if (PlayerPrefs.HasKey(playerToSpawn.name))
