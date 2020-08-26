@@ -19,9 +19,19 @@ public class CameraController : MonoBehaviour
     //是否显示大地图
     [SerializeField] private bool isBigMapActive;
 
+    public bool isBossRoom;
+
     private void Awake()
     {
         ins = this;
+    }
+
+    private void Start()
+    {
+        if (isBossRoom)
+        {
+            target = PlayerController.ins.transform;
+        }
     }
 
     private void Update()
@@ -32,7 +42,7 @@ public class CameraController : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.position.x, target.position.y, transform.position.z), moveSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.M) && !isBossRoom)
         {
             if (!isBigMapActive)
             {
