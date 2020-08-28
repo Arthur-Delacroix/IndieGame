@@ -134,9 +134,10 @@ GameObject:
   - component: {fileID: 21924427}
   - component: {fileID: 21924428}
   - component: {fileID: 21924429}
+  - component: {fileID: 21924430}
   m_Layer: 10
   m_Name: TheBoss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -195,6 +196,44 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &21924430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21924426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6ac0716a69ff4e88a85d1daf917b325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actions:
+  - actionLength: 2
+    shouldMove: 1
+    shouldChaseOlayer: 1
+    moveToPoint: 0
+    moveSpeed: 5
+    targetPoint: {fileID: 0}
+    shouldShoot: 0
+    bossBullet: {fileID: 0}
+    shootSpeed: 0
+    shootPoints: []
+  - actionLength: 2
+    shouldMove: 0
+    shouldChaseOlayer: 1
+    moveToPoint: 0
+    moveSpeed: 5
+    targetPoint: {fileID: 0}
+    shouldShoot: 1
+    bossBullet: {fileID: 4054775856511617186, guid: 4d3b622b4360c4518b045dfd3a2b2985,
+      type: 3}
+    shootSpeed: 0.5
+    shootPoints:
+    - {fileID: 2006993000}
+    - {fileID: 1336269607}
+    - {fileID: 1684272180}
+    - {fileID: 1518054775}
 --- !u!1 &30339348
 GameObject:
   m_ObjectHideFlags: 0
