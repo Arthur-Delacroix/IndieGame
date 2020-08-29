@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1278866907950244373}
   - component: {fileID: 4620606789774295133}
   - component: {fileID: 396718098979346285}
+  - component: {fileID: 7730327740188091550}
   m_Layer: 0
   m_Name: BossBullet
   m_TagString: Untagged
@@ -96,4 +97,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74d8999b9fc98486ba7ab63b2a269f66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 3
+--- !u!58 &7730327740188091550
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4054775856511617186}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.175
