@@ -19,6 +19,12 @@ public class BossController : MonoBehaviour
 
     private Vector2 moveDirection;
 
+    public int currentHealth;
+
+    public GameObject deathEffect;
+    public GameObject hitEffect;
+    public GameObject levelExit;
+
     private void Awake()
     {
         ins = this;
@@ -82,6 +88,25 @@ public class BossController : MonoBehaviour
             }
 
             actionCounter = actions[currentAction].actionLength;
+        }
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        currentHealth -= damageAmount;
+
+        if (currentHealth <= 0)
+        {
+            gameObject.SetActive(false);
+
+            Instantiate(deathEffect, transform.position, transform.rotation);
+
+            if (Vector3.Distance(PlayerController.ins.transform.position, levelExit.transform.position) < 3f)
+            {
+                levelExit.transform.position += new Vector3(4f, 0f, 0f);
+            }
+
+            levelExit.SetActive(true);
         }
     }
 }
