@@ -208,32 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6ac0716a69ff4e88a85d1daf917b325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actions:
-  - actionLength: 2
-    shouldMove: 1
-    shouldChaseOlayer: 1
-    moveToPoint: 0
-    moveSpeed: 5
-    targetPoint: {fileID: 0}
-    shouldShoot: 0
-    bossBullet: {fileID: 0}
-    shootSpeed: 0
-    shootPoints: []
-  - actionLength: 2
-    shouldMove: 0
-    shouldChaseOlayer: 1
-    moveToPoint: 0
-    moveSpeed: 5
-    targetPoint: {fileID: 0}
-    shouldShoot: 1
-    bossBullet: {fileID: 4054775856511617186, guid: 4d3b622b4360c4518b045dfd3a2b2985,
-      type: 3}
-    shootSpeed: 0.5
-    shootPoints:
-    - {fileID: 2006993000}
-    - {fileID: 1336269607}
-    - {fileID: 1684272180}
-    - {fileID: 1518054775}
+  actions: []
   theRB: {fileID: 21924429}
   currentHealth: 500
   deathEffect: {fileID: 3385648323526888679, guid: 87c4111ac0c406146ae7221327e59be3,
@@ -241,6 +216,66 @@ MonoBehaviour:
   hitEffect: {fileID: 6943144893830698129, guid: 5bb3e43fa38c13b4097e6083d7b464bb,
     type: 3}
   levelExit: {fileID: 534152032}
+  sequences:
+  - actions:
+    - actionLength: 2
+      shouldMove: 1
+      shouldChaseOlayer: 1
+      moveToPoint: 0
+      moveSpeed: 3.5
+      targetPoint: {fileID: 0}
+      shouldShoot: 0
+      bossBullet: {fileID: 0}
+      shootSpeed: 3.5
+      shootPoints: []
+    - actionLength: 2
+      shouldMove: 0
+      shouldChaseOlayer: 0
+      moveToPoint: 0
+      moveSpeed: 0
+      targetPoint: {fileID: 0}
+      shouldShoot: 1
+      bossBullet: {fileID: 4054775856511617186, guid: 4d3b622b4360c4518b045dfd3a2b2985,
+        type: 3}
+      shootSpeed: 4
+      shootPoints:
+      - {fileID: 2006993000}
+      - {fileID: 1336269607}
+      - {fileID: 1684272180}
+      - {fileID: 1518054775}
+    endSequenceHealth: 300
+  - actions:
+    - actionLength: 2
+      shouldMove: 1
+      shouldChaseOlayer: 1
+      moveToPoint: 0
+      moveSpeed: 5
+      targetPoint: {fileID: 0}
+      shouldShoot: 1
+      bossBullet: {fileID: 0}
+      shootSpeed: 1
+      shootPoints:
+      - {fileID: 2006993000}
+      - {fileID: 1336269607}
+      - {fileID: 1684272180}
+      - {fileID: 1518054775}
+    - actionLength: 2
+      shouldMove: 0
+      shouldChaseOlayer: 0
+      moveToPoint: 1
+      moveSpeed: 0
+      targetPoint: {fileID: 478620238}
+      shouldShoot: 1
+      bossBullet: {fileID: 4054775856511617186, guid: 4d3b622b4360c4518b045dfd3a2b2985,
+        type: 3}
+      shootSpeed: 0.5
+      shootPoints:
+      - {fileID: 2006993000}
+      - {fileID: 1336269607}
+      - {fileID: 1684272180}
+      - {fileID: 1518054775}
+    endSequenceHealth: 100
+  currentSequence: 0
 --- !u!1 &30339348
 GameObject:
   m_ObjectHideFlags: 0

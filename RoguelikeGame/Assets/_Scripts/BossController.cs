@@ -25,6 +25,9 @@ public class BossController : MonoBehaviour
     public GameObject hitEffect;
     public GameObject levelExit;
 
+    public BossSequence[] sequences;
+    public int currentSequence;
+
     private void Awake()
     {
         ins = this;
@@ -32,6 +35,8 @@ public class BossController : MonoBehaviour
 
     private void Start()
     {
+        actions = sequences[currentAction].actions;
+
         actionCounter = actions[currentAction].actionLength;
 
         UIController.ins.bossHealthBar.maxValue = currentHealth;
@@ -54,7 +59,7 @@ public class BossController : MonoBehaviour
                     moveDirection.Normalize();
                 }
 
-                if (actions[currentAction].moveToPoint)
+                if (actions[currentAction].moveToPoint&&Vector3.Distance(transform.position, actions[currentAction].targetPoint.position)>0.5f)
                 {
                     moveDirection = actions[currentAction].targetPoint.position - transform.position;
 
@@ -113,6 +118,21 @@ public class BossController : MonoBehaviour
 
             UIController.ins.bossHealthBar.gameObject.SetActive(false);
         }
+        else
+        {
+            if (currentHealth<=sequences[currentSequence].endSequenceHealth&&
+                currentSequence <  sequences.Length-1
+                )
+            {
+                currentSequence ++;
+                actions = sequences[currentSequence].actions;
+                currentAction = 0;
+                actionCounter = actions[currentAction].actionLength;
+
+            }
+        }
+
+
 
         UIController.ins.bossHealthBar.value = currentHealth;
     }
@@ -136,4 +156,13 @@ public class BossAction
     public GameObject bossBullet;
     public float shootSpeed;
     public Transform[] shootPoints;
+}
+
+[System.Serializable]
+public class BossSequence
+{
+    [Header("Sequence")]
+    public BossAction[] actions;
+
+    public int endSequenceHealth;
 }
