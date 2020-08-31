@@ -19,7 +19,6 @@ public class UIController : MonoBehaviour
     //金币文字
     public Text coinText;
 
-
     //游戏结束界面
     public GameObject deathScreen;
 
@@ -45,12 +44,16 @@ public class UIController : MonoBehaviour
     public Image currentGunImage;
     public Text currentGunText;
 
+    //BOSS
+    public Slider bossHealthBar;
+
+
     private void Awake()
     {
         ins = this;
     }
 
-    void Start()
+    private void Start()
     {
         fadeOutBlack = true;
         fadeToBlack = false;

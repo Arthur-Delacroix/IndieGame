@@ -33,6 +33,9 @@ public class BossController : MonoBehaviour
     private void Start()
     {
         actionCounter = actions[currentAction].actionLength;
+
+        UIController.ins.bossHealthBar.maxValue = currentHealth;
+        UIController.ins.bossHealthBar.value = currentHealth;
     }
 
     private void Update()
@@ -107,7 +110,11 @@ public class BossController : MonoBehaviour
             }
 
             levelExit.SetActive(true);
+
+            UIController.ins.bossHealthBar.gameObject.SetActive(false);
         }
+
+        UIController.ins.bossHealthBar.value = currentHealth;
     }
 }
 
