@@ -1628,6 +1628,7 @@ MonoBehaviour:
   message: {fileID: 1017329969}
   playerToSpawn: {fileID: 1946127616797199388, guid: 8d224ee6e3b477d458abc814e9fa2285,
     type: 3}
+  shouldUnlock: 0
 --- !u!212 &757203004
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9945,6 +9946,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4098930461070967922, guid: 1157fb1f9bb8f074bb1f7e849d5a0c55,
+        type: 3}
+      propertyPath: shouldUnlock
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1157fb1f9bb8f074bb1f7e849d5a0c55, type: 3}
 --- !u!1001 &6299994624410314790
@@ -10018,6 +10024,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8521981069484178236, guid: ece73e619f551d744a1faa6cd4d61979,
+        type: 3}
+      propertyPath: shouldUnlock
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ece73e619f551d744a1faa6cd4d61979, type: 3}
