@@ -9,8 +9,6 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private string levelToLoad;
 
-    public CharacterSelector[] characterToDelete;
-
     public void StartGame()
     {
         SceneManager.LoadScene(levelToLoad);
@@ -19,13 +17,5 @@ public class MainMenu : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
-    }
-
-    public void DeleteSave()
-    {
-        foreach (CharacterSelector _item in characterToDelete)
-        {
-            PlayerPrefs.SetInt(_item.playerToSpawn.name, 0);
-        }
     }
 }
